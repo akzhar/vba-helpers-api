@@ -1,0 +1,16 @@
+{
+  "name": "vba-helpers-api",
+  "version": "1.0.0",
+  "description": "Simple json API for vba-helpers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "akzhar.taov@yandex.ru",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "0.17.0"
+  }
+}
