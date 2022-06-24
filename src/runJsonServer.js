@@ -4,9 +4,9 @@ const os = require('os');
 const jsonServer = require('json-server');
 const PORT = process.env.PORT || 80;
 
-function runJsonServer(routes, json) {
+function runJsonServer(routes, routedData) {
   const server = jsonServer.create();
-  const router = jsonServer.router(json);
+  const router = jsonServer.router(routedData);
   const middlewares = jsonServer.defaults({ readOnly: true, host: os.hostname });
 
   server.use(middlewares);

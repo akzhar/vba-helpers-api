@@ -1,3 +1,8 @@
 {
-  "/api/*": "/$1"
+  "/api/*": "/$1",
+  "/categories/search/:keyword": "/categories?category_like=:keyword",
+  "/helpers/search-by/category/:keyword": "/helpers?category_like=:keyword",
+  "/helpers/search-by/title/:keyword": "/helpers?title_like=:keyword",
+  "/helpers/search-by/tag/:keyword": "/helpers?tags_like=:keyword",
+  "/tags/search-by/category/:keyword": "/tagsByCategory?category_like=:keyword"
 }
