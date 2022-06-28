@@ -3,6 +3,6 @@
   "/categories/search/:keyword": "/categories?category_like=:keyword",
   "/helpers/search-by/category/:keyword": "/helpers?category_like=:keyword",
   "/helpers/search-by/title/:keyword": "/helpers?title_like=:keyword",
-  "/helpers/search-by/tag/:keyword": "/helpers?tags_like=:keyword",
-  "/tags/search-by/category/:keyword": "/tagsByCategory?category_like=:keyword"
+  "/helpers/search-by/keyword/:keyword": "/helpers?_keywords_like=:keyword",
+  "/keywords/search-by/category/:keyword": "/keywordsByCategory?category_like=:keyword"
 }
