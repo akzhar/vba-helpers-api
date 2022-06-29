@@ -1,5 +1,9 @@
 # VBA helpers API
 
+[API home page](https://vba-helpers-api.herokuapp.com/)
+
+## API routes
+
 - [GET /api/helpers](https://vba-helpers-api.herokuapp.com/api/helpers) - получение хелперов
 - [GET /api/helpers/search-by-category/:keyword](https://vba-helpers-api.herokuapp.com/api/helpers/search-by-category/числа) - поиск хелперов по категории
 - [GET /api/helpers/search-by-name/:keyword](https://vba-helpers-api.herokuapp.com/api/helpers/search-by-name/getlastrow) - поиск хелперов по имени

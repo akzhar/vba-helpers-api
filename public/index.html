@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>VBA helpers API</title>
+    <style>
+      body { margin: 0; padding: 10px 20px; font-family: "Georgia"; }
+      .routes-list li { margin: 10px 0; }
+    </style>
+	</head>
+	<body>
+		<h1>VBA helpers API</h1>
+		<a href="https://github.com/akzhar/vba-helpers-api" target="_blank">Open repository</a>
+		<h2>API routes</h2>
+		<ul class="routes-list">
+			<li><a href="./api/helpers">GET /api/helpers</a> - получение хелперов</li>
+			<li><a href="./api/helpers/search-by-category/числа">GET /api/helpers/search-by-category/:keyword</a> - поиск хелперов по категории</li>
+			<li><a href="./api/helpers/search-by-name/getlastrow">GET /api/helpers/search-by-name/:keyword</a> - поиск хелперов по имени</li>
+			<li><a href="./api/helpers/search-by-title/получить%20индекс">GET /api/helpers/search-by-title/:keyword</a> - поиск хелперов по заголовку</li>
+			<li><a href="./api/helpers/search-by-keyword/sort%20array">GET /api/helpers/search-by-keyword/:keyword</a> - поиск хелперов по ключевым словам (фразе)</li>
+			<li><a href="./api/keywords/search-by-category/конвертация">GET /api/keywords/search-by-category/:keyword</a> - получение списка ключевых слов (фраз) по категории</li>
+			<li><a href="./api/categories">GET /api/categories</a> - получение списка категорий</li>
+			<li><a href="./api/categories/search/строки">GET /api/categories/search/:keyword</a> - поиск категории по имени</li>
+		</ul>
+	</body>
+</html>
