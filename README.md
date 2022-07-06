@@ -9,9 +9,9 @@
 - [GET /api/helpers/search-by-name/:keyword](https://vba-helpers-api.herokuapp.com/api/helpers/search-by-name/getlastrow) - поиск хелперов по имени
 - [GET /api/helpers/search-by-title/:keyword](https://vba-helpers-api.herokuapp.com/api/helpers/search-by-title/получить%20индекс) - поиск хелперов по заголовку
 - [GET /api/helpers/search-by-keyword/:keyword](https://vba-helpers-api.herokuapp.com/api/helpers/search-by-keyword/sort%20array) - поиск хелперов по ключевым словам (фразе)
-- [GET /api/keywords/search-by-category/:keyword](https://vba-helpers-api.herokuapp.com/api/keywords/search-by-category/конвертация) - получение списка ключевых слов (фраз) по категории
 - [GET /api/categories](https://vba-helpers-api.herokuapp.com/api/categories) - получение списка категорий
 - [GET /api/categories/search/:keyword](https://vba-helpers-api.herokuapp.com/api/categories/search/строки) - поиск категории по имени
+- [GET /api/categories/search-by-keyword/:keyword](https://vba-helpers-api.herokuapp.com/api/categories/search-by-keyword/конвертация) - поиск категорий по ключевым словам (фразе)
 
 ## 1. Установка зависимостей
 Находясь в корневой папке проекта, выполните команду:

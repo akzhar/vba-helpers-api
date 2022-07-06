@@ -1,9 +1,9 @@
 {
   "/api/*": "/$1",
   "/categories/search/:keyword": "/categories?category_like=:keyword",
+  "/categories/search-by-keyword/:keyword": "/categories?keywords_like=:keyword",
   "/helpers/search-by-category/:keyword": "/helpers?category_like=:keyword",
   "/helpers/search-by-name/:keyword": "/helpers?name_like=:keyword",
   "/helpers/search-by-title/:keyword": "/helpers?title_like=:keyword",
-  "/helpers/search-by-keyword/:keyword": "/helpers?_keywords_like=:keyword",
-  "/keywords/search-by-category/:keyword": "/keywordsByCategory?category_like=:keyword"
+  "/helpers/search-by-keyword/:keyword": "/helpers?_keywords_like=:keyword"
 }

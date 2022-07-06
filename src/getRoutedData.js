@@ -2,36 +2,32 @@
 
 // ф-ция разбивает данные (json) по роутам
 function getRoutedData(json) {
-  
-  let [ categories, keywordsByCategory ] = json.reduce(([ categories, keywordsByCategory ], item) => {
-    
-    const { category: itemCategories, _keywords: itemKeywords } = item;
 
-    const keywords = itemKeywords.split('\n');
+  let categoriesData = json.reduce((acc, item) => {
+    
+    const { category: itemCategories, _keywords } = item;
+
+    const itemKeywords = _keywords.split('\n');
 
     itemCategories.forEach(category => {
+      const categoryExists = Boolean(Object.hasOwnProperty.call(acc, category));
 
-      const categoryExists = Boolean(Object.hasOwnProperty.call(keywordsByCategory, category));
+      const keywords = categoryExists ? acc[category].keywords.concat(itemKeywords) : itemKeywords;
+      const helpersCount = categoryExists ? acc[category].helpersCount + 1 : 1;
 
-      if (categoryExists) {
-        keywordsByCategory[category] = keywordsByCategory[category].concat(keywords);
-      } else {
-        keywordsByCategory[category] = keywords;
-      }
-
-      keywordsByCategory[category] = [...new Set(keywordsByCategory[category])];
-
+      acc[category] = { keywords: [...new Set(keywords)], helpersCount };
     });
 
-    return [ categories, keywordsByCategory ];
+    return acc;
 
-  }, [ {}, {} ]);
+  }, {});
 
-  categories = Object.keys(keywordsByCategory);
-  categories = categories.map((item, i) => ({ id: i, category: item }));
-  keywordsByCategory = Object.keys(keywordsByCategory).map((key, i) => ( { id: i, category: key, keywords: keywordsByCategory[key] }));
+  const categories = Object.keys(categoriesData).map((category, i) => {
+    const { helpersCount, keywords } = categoriesData[category];
+    return { id: i, category, helpersCount, keywords };
+  });
 
-  return { helpers: json, categories, keywordsByCategory };
+  return { helpers: json, categories };
 }
 
 module.exports = getRoutedData;
