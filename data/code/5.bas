@@ -4,8 +4,10 @@ Option Explicit
 Function FilterArr(ByRef arr(), ByVal element, Optional ByVal elementPos&) As Variant
     ' ф-ция фильтрует 1 или 2 мерный массив
     ' возвращает 1 мерный массив со всеми вхождениями element в arr
-    Dim i&, arrElement
-    Dim filteredArr: filteredArr = Array()
+    Dim i&, arrElement, filteredArr()
+    
+    filteredArr = Array()
+
     For i = LBound(arr) To UBound(arr)
         If elementPos = 0 Then
             arrElement = arr(i)
@@ -17,5 +19,6 @@ Function FilterArr(ByRef arr(), ByVal element, Optional ByVal elementPos&) As Va
             filteredArr(UBound(filteredArr)) = arrElement
         End If
     Next i
+
     FilterArr = filteredArr
 End Function

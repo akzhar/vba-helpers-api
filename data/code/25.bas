@@ -1,7 +1,7 @@
 Attribute VB_Name = "Helper25"
 Option Explicit
 
-Function GetFolderPath(ByVal titleMessage$, Optional ByVal defaultPath$ = ThisWorkbook.Path) As String
+Function GetFolderPath(ByVal titleMessage$, Optional ByVal defaultPath$ = "") As String
     ' ф-ция открывает окно для выбора папки
     ' возвращает путь к выбранной папке
     
@@ -11,14 +11,14 @@ Function GetFolderPath(ByVal titleMessage$, Optional ByVal defaultPath$ = ThisWo
     With dialog
         .Title = titleMessage
         .AllowMultiSelect = False
-        .InitialFileName = defaultPath
+        .InitialFileName = IIf(defaultPath = "", ThisWorkbook.path, defaultPath)
         If .Show <> -1 Then
-            GoTo NextCode
+            GoTo CancelHandler
         End If
         folderPath = .SelectedItems(1)
     End With
     
-NextCode:
+CancelHandler:
     
     Set dialog = Nothing
         

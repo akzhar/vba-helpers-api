@@ -4,11 +4,14 @@ Option Explicit
 Function Rng2Array(ByRef rng As Range) As String()
     ' ф-ция возвращает 1 мерный массив, заполненный значениями из диапазона rng
     ' все значения приводятся к строке
-    Dim i&, individualCell As Range
-    Dim arr() As String: ReDim arr(rng.Count - 1)
-    For Each individualCell In rng
-        arr(i) = CStr(individualCell.Value)
+    Dim i&, cell As Range, arr() As String
+    
+    ReDim arr(rng.Count - 1)
+
+    For Each cell In rng
+        arr(i) = CStr(cell.Value)
         i = i + 1
-    Next
+    Next cell
+    
     Rng2Array = arr
 End Function
