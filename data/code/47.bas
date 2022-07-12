@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper47"
 Option Explicit
 
 '@recurrenceType - "Daily", "Weekly", "Monthly", "Annual"
-Function CreateAppointment(ByVal subject$, ByVal body$, ByVal startDate$, Optional ByVal recurrenceType$ = "")
+Function CreateAppointment(ByVal subject$, ByVal body$, ByVal startDate As Date, Optional ByVal recurrenceType$ = "")
     ' ф-ция создает в календаре текущего пользователя новое событие
 
     If subject = "" Then
@@ -10,10 +10,8 @@ Function CreateAppointment(ByVal subject$, ByVal body$, ByVal startDate$, Option
         Exit Function
     End If
 
-    Dim dStartDate As Date: dStartDate = CDate(startDate)
-
     ' события в календаре не создаются для дат из прошлого
-    If dStartDate < Date Then
+    If startDate < Date Then
         MsgBox "Ошибка: дата < сегодня", vbExclamation
         Exit Function
     End If
@@ -31,7 +29,7 @@ Function CreateAppointment(ByVal subject$, ByVal body$, ByVal startDate$, Option
     
     For Each appointmentItem In appointments
         
-        If appointmentItem.Subject = subject Then
+        If appointmentItem.subject = subject Then
             MsgBox "Ошибка: событие с таким заголовком уже существует", vbExclamation
             Exit Function
         End If
@@ -40,26 +38,26 @@ Function CreateAppointment(ByVal subject$, ByVal body$, ByVal startDate$, Option
 
     Dim newAppointmentItem As Object: Set newAppointmentItem = calendarObj.Items.Add(APPOINTMENT_TYPE)
     
-    newAppointmentItem.Subject = subject
-    newAppointmentItem.Body = IIf(body <> "", body & vbLf & vbLf, "") & "Создано с помощью макроса"
-    newAppointmentItem.Start = dStartDate
+    newAppointmentItem.subject = subject
+    newAppointmentItem.body = IIf(body <> "", body & vbLf & vbLf, "") & "Создано с помощью макроса"
+    newAppointmentItem.Start = startDate
     newAppointmentItem.AllDayEvent = True
     
     ' периодический повтор задачи
     If recurrenceType <> "" Then
                 
         Dim recurrencePattern As Object: Set recurrencePattern = newAppointmentItem.GetRecurrencePattern
-        recurrencePattern.PatternStartDate = dStartDate
+        recurrencePattern.PatternStartDate = startDate
         
         Select Case recurrenceType
             Case "Daily"
-                recurrencePattern.RecurrenceType = 0
+                recurrencePattern.recurrenceType = 0
             Case "Weekly"
-                recurrencePattern.RecurrenceType = 1
+                recurrencePattern.recurrenceType = 1
             Case "Monthly"
-                recurrencePattern.RecurrenceType = 3
+                recurrencePattern.recurrenceType = 3
             Case "Annual"
-                recurrencePattern.RecurrenceType = 5
+                recurrencePattern.recurrenceType = 5
         End Select
         
     End If

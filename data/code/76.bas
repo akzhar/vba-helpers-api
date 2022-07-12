@@ -16,8 +16,8 @@ Function CONCATENATEIF(ByRef rngToCheck As Range, ByRef rngToConcat As Range, By
     'Set rngToCheck = Intersect(rngToCheck, ActiveSheet.UsedRange)
     'Set rngToConcat = Intersect(rngToConcat, ActiveSheet.UsedRange)
     For Each cell In rngToCheck
-       If cell.Value Like pattern And Trim(rngToConcat.Cells(cell.Row - rngWithPattern.Row + 1, 1)) <> "" Then
-          str = str & IIf(str <> "", separator, "") & rngToConcat.Cells(cell.Row - rngWithPattern.Row + 1, 1)
+       If cell.Value Like pattern And Trim(rngToConcat.Cells(cell.Row - rngToCheck.Row + 1, 1)) <> "" Then
+          str = str & IIf(str <> "", separator, "") & rngToConcat.Cells(cell.Row - rngToCheck.Row + 1, 1)
        End If
     Next cell
     CONCATENATEIF = str

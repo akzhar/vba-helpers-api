@@ -14,14 +14,3 @@ Function StopTimer() As String
     executionTime = Format((endTime - startTime) / 86400, "hh:mm:ss")
     stopTimer = executionTime
 End Function
-
-' Sub TimerExample()
-
-'     Call RunTimer
-
-      ' ждем 5 сек
-'     Application.Wait (Now + TimeValue("00:00:05"))
-
-'     Debug.Print ("Время выполнения скрипта: " & StopTimer())
-
-' End Sub

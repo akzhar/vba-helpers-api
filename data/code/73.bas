@@ -1,7 +1,8 @@
 Attribute VB_Name = "Helper73"
 Option Explicit
 
-Function Rng2String(ByRef rng As Range) As String
+Function Rng2String(ByRef rng As Range, ByVal separator$) As String
     ' ф-ция склеивает диапазон в текстовую строку через разделитель
-    Rng2String = Join(Application.Transpose(rng), Chr(10))
+    Dim arr() As String: arr = Rng2Array(rng) ' @(id 3)
+    Rng2String = Join(arr, separator)
 End Function

@@ -1,7 +1,7 @@
 Attribute VB_Name = "Helper37"
 Option Explicit
 
-Function GetRgbLongValue(ByVal R&, ByVal G&, ByVal B&) As Long
+Function Rgb2Long(ByVal R&, ByVal G&, ByVal B&) As Long
     ' ф-ция возвращает значение RGB цвета в Long формате
-    GetRgbLongValue = (R * 65536) + (G * 256) + B
+    Rgb2Long = (B * 65536) + (G * 256) + R
 End Function

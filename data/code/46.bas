@@ -2,8 +2,8 @@ Attribute VB_Name = "Helper46"
 Option Explicit
 
 '@importanceType - "Высокая", "Средняя", "Низкая"
-'@method = "Показать перед отправкой", "Сохранить перед отправкой", "Сразу отправить"
-Function SendEmail(ByVal subject$, ByVal body$, ByVal sendTo$, ByVal copyTo$, Optional ByVal attachmentPath$ = "", Optional ByVal method$ = "Показать перед отправкой", Optional ByVal importanceType$ = "Низкая")
+'@method = "Показать", "Сохранить", "Отправить"
+Function SendEmail(ByVal subject$, ByVal body$, ByVal sendTo$, Optional ByVal copyTo$, Optional ByVal attachmentPath$ = "", Optional ByVal method$ = "Показать перед отправкой", Optional ByVal importanceType$ = "Низкая")
     ' ф-ция отправляет письмо в Outlook
 
     Const OUTLOOK_ITEM_TYPE& = 0
@@ -28,30 +28,32 @@ Function SendEmail(ByVal subject$, ByVal body$, ByVal sendTo$, ByVal copyTo$, Op
         
     With Mail
 
-      .CC = copyTo
-      .To = sendTo
-      .Importance = importance
-      .Subject = subject
-      .Body = body
+        If Not IsNull(copyTo) Then
+            .CC = copyTo
+        End If
+        .To = sendTo
+        .importance = importance
+        .subject = subject
+        .body = body
 
-      If attachmentPath <> "" Then
-          .Attachments.Add (attachmentPath)
-      End If
+        If attachmentPath <> "" Then
+            .Attachments.Add (attachmentPath)
+        End If
           
-      Select Case method
-          Case "Показать перед отправкой"
-              .Display
-              messageEnding = "сформировано"
-          Case "Сохранить перед отправкой"
-              .Save
-              messageEnding = "сохранено в папке Черновики / Drafts"
-          Case "Сразу отправить"
-              .Send
-              messageEnding = "отправлено"
-          Case Else
-              .Display
-              messageEnding = "сформировано"
-      End Select
+        Select Case method
+            Case "Показать"
+                .Display
+                messageEnding = "сформировано"
+            Case "Сохранить"
+                .Save
+                messageEnding = "сохранено в папке Черновики / Drafts"
+            Case "Отправить"
+                .Send
+                messageEnding = "отправлено"
+            Case Else
+                .Display
+                messageEnding = "сформировано"
+        End Select
     
     End With
         

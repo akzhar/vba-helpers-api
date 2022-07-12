@@ -14,8 +14,9 @@ Function ShowInterface(ByVal flag As Boolean)
         With .ActiveWindow
             .Caption = IIf(flag = True, .Parent.Name, "")
             .DisplayHeadings = flag: .DisplayGridlines = flag
-            '.DisplayHorizontalScrollBar = flag: .DisplayVerticalScrollBar = flag
-            '.DisplayWorkbookTabs = flag
+            .DisplayHorizontalScrollBar = flag
+            .DisplayVerticalScrollBar = flag
+            .DisplayWorkbookTabs = flag
         End With
         .ExecuteExcel4Macro "SHOW.TOOLBAR(""Ribbon"", " & flag & ")"
         .ScreenUpdating = True
