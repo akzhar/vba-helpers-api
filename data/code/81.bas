@@ -1,10 +1,10 @@
 Attribute VB_Name = "Helper81"
 Option Explicit
 
-Function Collection2Array(ByRef coll As Object) As String()
+Function Collection2Array(ByRef coll As Object) As Variant()
     ' ф-ция конвертирует коллекцию в массив
 
-    Dim i&, arr() As String
+    Dim i&, arr()
 
     For i = 1 To coll.Count
         If i = 1 Then
