@@ -3,5 +3,5 @@ Option Explicit
 
 Function SetRngBackColor(ByRef rng As Range, ByVal hexColor$)
     ' ф-ция устанавливает цвет заливки у rng
-    rng.Interior.Color = Hex2Rgb(hexColor) ' @(id 38)
+    rng.Interior.Color = Hex2Long(hexColor) ' @(id 38)
 End Function
