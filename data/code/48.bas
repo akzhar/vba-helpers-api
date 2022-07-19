@@ -1,7 +1,7 @@
 Attribute VB_Name = "Helper48"
 Option Explicit
 
-Function ConvertNumbersStoredAsText(ByRef rng As Range)
+Function FixNumbers(ByRef rng As Range)
     ' ф-ция исправляет ошибку number stored as text, преобразую каждую ячейку в диапазоне в число
     Dim cell As Range
     Call TurnUpdatesOn(False) ' @(id 51)

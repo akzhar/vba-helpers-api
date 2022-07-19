@@ -26,18 +26,18 @@ Sub CompareTables()
     Set ws1 = ThisWorkbook.Sheets(SHEET_1_NO)
     Set ws2 = ThisWorkbook.Sheets(SHEET_2_NO)
 
-    iLastRow2 = Utils.GetLastRow(ws2, FIRST_COL) ' @(id 64)
-    iLastCol2 = Utils.GetLastColumn(ws2, FIRST_ROW - 1) ' @(id 65)
+    iLastRow2 = GetLastRow(ws2, FIRST_COL) ' @(id 64)
+    iLastCol2 = GetLastColumn(ws2, FIRST_ROW - 1) ' @(id 65)
 
-    iLastRow1 = Utils.GetLastRow(ws1, FIRST_COL) ' @(id 64)
-    iLastCol1 = Utils.GetLastColumn(ws1, FIRST_ROW - 1) ' @(id 65)
+    iLastRow1 = GetLastRow(ws1, FIRST_COL) ' @(id 64)
+    iLastCol1 = GetLastColumn(ws1, FIRST_ROW - 1) ' @(id 65)
 
     ws2.Range(ws2.Cells(FIRST_ROW, FIRST_COL), ws2.Cells(iLastRow2, FIRST_COL)).Interior.Color = COLOR_RED
 
     ws1.Range(ws1.Cells(FIRST_ROW, FIRST_COL), ws1.Cells(iLastRow1, FIRST_COL)).Interior.Color = COLOR_RED
 
     If iLastCol2 <> iLastCol1 Then
-        Call Utils.Ended
+        Call Ended
         MsgBox "Количество и порядок следования столбцов в 2-х сравниваемых таблицах должны совпадать", vbCritical
         Exit Sub
     End If
@@ -106,8 +106,8 @@ Sub ResetTables()
     Set ws1 = ThisWorkbook.Sheets(SHEET_1_NO)
     Set ws2 = ThisWorkbook.Sheets(SHEET_2_NO)
 
-    iLastRow2 = Utils.GetLastRow(ws2, FIRST_COL) ' @(id 64)
-    iLastCol2 = Utils.GetLastColumn(ws2, FIRST_ROW - 1) ' @(id 65)
+    iLastRow2 = GetLastRow(ws2, FIRST_COL) ' @(id 64)
+    iLastCol2 = GetLastColumn(ws2, FIRST_ROW - 1) ' @(id 65)
 
     With ws2.Range(ws2.Cells(FIRST_ROW, FIRST_COL), ws2.Cells(iLastRow2, iLastCol2))
       .Interior.Color = xlNone
@@ -115,8 +115,8 @@ Sub ResetTables()
     End with
     Application.Goto [A1], True
 
-    iLastRow1 = Utils.GetLastRow(ws1, FIRST_COL) ' @(id 64)
-    iLastCol1 = Utils.GetLastColumn(ws1, FIRST_ROW - 1) ' @(id 65)
+    iLastRow1 = GetLastRow(ws1, FIRST_COL) ' @(id 64)
+    iLastCol1 = GetLastColumn(ws1, FIRST_ROW - 1) ' @(id 65)
 
     With ws1.Range(ws1.Cells(FIRST_ROW, FIRST_COL), ws1.Cells(iLastRow1, iLastCol1))
       .Interior.Color = xlNone

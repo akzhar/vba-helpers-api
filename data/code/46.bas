@@ -1,9 +1,7 @@
 Attribute VB_Name = "Helper46"
 Option Explicit
 
-'@importanceType - "Высокая", "Средняя", "Низкая"
-'@method = "Показать", "Сохранить", "Отправить"
-Function SendEmail(ByVal subject$, ByVal body$, ByVal sendTo$, Optional ByVal copyTo$, Optional ByVal attachmentPath$ = "", Optional ByVal method$ = "Показать перед отправкой", Optional ByVal importanceType$ = "Низкая")
+Function SendEmail(ByVal subject$, ByVal body$, ByVal sendTo$, Optional ByVal copyTo$, Optional ByVal attachmentPath$ = "", Optional ByVal method$ = "Показать", Optional ByVal importanceType$ = "Низкая")
     ' ф-ция отправляет письмо в Outlook
 
     Const OUTLOOK_ITEM_TYPE& = 0

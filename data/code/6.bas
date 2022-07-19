@@ -1,7 +1,7 @@
 Attribute VB_Name = "Helper6"
 Option Explicit
 
-Function FilterArr(ByRef arr(), ByVal fnName$, Optional ByVal elementPos&) As Variant
+Function FilterArr(ByRef arr(), ByVal fnName$, Optional ByVal elementPos&) As Variant()
     ' ф-ция фильтрует 1 или 2 мерный массив
     ' возвращает 1 мерный массив со всеми вхождениями element в arr
     ' ф-ция с именем fnName будет вызвана с каждым эл-том массива arr в кач-ве единственного параметра

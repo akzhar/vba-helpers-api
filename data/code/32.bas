@@ -1,7 +1,8 @@
 Attribute VB_Name = "Helper32"
 Option Explicit
 
-Function SetRngFontColor(ByRef rng As Range, ByVal hexColor$)
+Function SetFontColor(ByRef rng As Range, ByVal color)
     ' ф-ция устанавливает цвет текста у rng
-    rng.Font.Color = Hex2Long(hexColor) ' @(id 38)
+    Dim isHex as Boolean: isHex = Includes(CStr(color), "#") ' @(id 69)
+    rng.Font.Color = Iif(isHex, Hex2Long(color), color) ' @(id 38)
 End Function

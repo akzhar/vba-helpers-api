@@ -5,7 +5,7 @@ Function GetFolderPath(ByVal titleMessage$, Optional ByVal defaultPath$ = "") As
     ' ф-ция открывает окно для выбора папки
     ' возвращает путь к выбранной папке
     
-    Dim folderPath$
+    Dim folderPath$: folderPath = ""
     Dim dialog As FileDialog: Set dialog = Application.FileDialog(msoFileDialogFolderPicker)
     
     With dialog

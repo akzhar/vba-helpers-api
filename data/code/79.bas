@@ -1,7 +1,7 @@
 Attribute VB_Name = "Helper79"
 Option Explicit
 
-Function PicturesExport(ByRef ws As Worksheet, ByVal pathToSave$)
+Function ExportPictures(ByRef ws As Worksheet, ByVal pathToSave$)
     ' ф-ция экспортирует все изображения с листа в указанную папку
 
     Dim shp As Shape

@@ -12,8 +12,10 @@ Function init()
     HttpCodes("500") = "SERVER ERROR"
 End Function
 
-Function HttpQuery(ByVal method$, ByVal url$, ByVal contentType$, Optional ByVal reqBody$) As Variant
+Function HttpQuery(ByVal url$, Optional ByVal method$ = "GET", Optional ByVal contentType$ = "text/plain", Optional ByVal reqBody$) As Variant
     ' ф-ция выполняет HTTP запрос
+
+    Call init
     
     Dim req As Object: Set req = CreateObject("WinHttp.WinHttpRequest.5.1")
           
@@ -35,7 +37,7 @@ Function HttpQuery(ByVal method$, ByVal url$, ByVal contentType$, Optional ByVal
     If contentType = "application/json" Then
         Set HttpQuery = JsonConverter.ParseJson(req.responseText) ' @(id 42)
     Else
-        Set HttpQuery = req.responseText
+        HttpQuery = req.responseText
     End If
             
 End Function

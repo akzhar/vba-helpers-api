@@ -1,7 +1,8 @@
 Attribute VB_Name = "Helper33"
 Option Explicit
 
-Function SetRngBackColor(ByRef rng As Range, ByVal hexColor$)
+Function SetBackColor(ByRef rng As Range, ByVal color)
     ' ф-ция устанавливает цвет заливки у rng
-    rng.Interior.Color = Hex2Long(hexColor) ' @(id 38)
+    Dim isHex as Boolean: isHex = Includes(CStr(color), "#") ' @(id 69)
+    rng.Interior.Color = Iif(isHex, Hex2Long(color), color) ' @(id 38)
 End Function

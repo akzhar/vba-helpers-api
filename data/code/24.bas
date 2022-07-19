@@ -1,18 +1,19 @@
 Attribute VB_Name = "Helper24"
 Option Explicit
 
-Sub ExportVBProject(ByVal folderName$)
-    ' ф-ция экспортирует VBProject файлы из выбранного Excel файла в папку с именем folderName
+Sub ExportVBProject()
+    ' ф-ция экспортирует VBProject файлы из выбранного Excel файла в папку с именем macros
 
+    Const FOLDER_NAME$ = "macros"
     Dim arr() As String: arr = GetFilePaths("Выбери файл с VBProject", "*.xlsm; *.xlsb") ' @(id 23)
     Dim pathToFile$: pathToFile = arr(0)
     Dim wb As Workbook: Set wb = Workbooks.Open(pathToFile)
     Dim pathToSaveVba As String: pathToSaveVba = wb.path
     Dim separator$: separator = Application.PathSeparator
     
-    Call CreateFolder(pathToSaveVba, folderName) ' @(id 22)
+    Call CreateFolder(pathToSaveVba, FOLDER_NAME) ' @(id 22)
     
-    pathToSaveVba = pathToSaveVba & separator & folderName
+    pathToSaveVba = pathToSaveVba & separator & FOLDER_NAME
     
     Dim objVbComp
     For Each objVbComp In wb.VBProject.VBComponents

@@ -1,7 +1,7 @@
 Attribute VB_Name = "Helper9"
 Option Explicit
 
-Function SortArr(ByRef arr(), ByVal N&, Optional ByVal isDesc As Boolean = True) As Variant
+Function SortArr(ByRef arr(), ByVal N&, Optional ByVal isDesc As Boolean = True) As Variant()
     ' ф-ция сортирует переданный 2 мерный массив по столбцу N
     ' desc: по убыванию, от большего к меньшему (<)
     ' asc: по возрастанию, от меньшего к большему (>)

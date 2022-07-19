@@ -1,7 +1,6 @@
 Attribute VB_Name = "Helper47"
 Option Explicit
 
-'@recurrenceType - "Daily", "Weekly", "Monthly", "Annual"
 Function CreateAppointment(ByVal subject$, ByVal body$, ByVal startDate As Date, Optional ByVal recurrenceType$ = "")
     ' ф-ция создает в календаре текущего пользователя новое событие
 

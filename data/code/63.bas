@@ -1,7 +1,7 @@
 Attribute VB_Name = "Helper63"
 Option Explicit
 
-Function GetColumnLeterByNum(ByVal colNo&) As String
+Function GetColumnLeter(ByVal colNum&) As String
   ' ф-ция возвращает букву столбца по его номеру
-  GetColumnLeterByNum = Replace(Cells(1, colNo).Address(0, 0), 1, "")
+  GetColumnLeter = Replace(Cells(1, colNum).Address(0, 0), 1, "")
 End Function

@@ -5,7 +5,7 @@ Function GetRowByHeader(ByRef ws As Worksheet, ByVal headerValue$, ByVal headerC
   ' ф-ция возвращает номер строки, в которой был найден заголовок headerValue в столбце headerCol
 
   Dim foundRow&: foundRow = 0
-  Dim lastRow&: lastRow = utils.GetLastRow(ws, headerCol)
+  Dim lastRow&: lastRow = GetLastRow(ws, headerCol) ' @(id 64)
   Dim i&
 
   For i = 1 To lastRow

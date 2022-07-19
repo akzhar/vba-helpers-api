@@ -1,7 +1,7 @@
 Attribute VB_Name = "Helper7"
 Option Explicit
 
-Function FilterArr(ByRef arr(), ParamArray args()) As Variant
+Function FilterArr(ByRef arr(), ParamArray args()) As Variant()
     ' ф-ция фильтрует многомерный массив arr, используя массив критериев фильтрации args
     ' формат критерия: "номер столбца" & "=" & "искомое значение", например, "3=маска текста"
     ' возвращает двумерный массив с подходящими строками из массива arr
@@ -73,15 +73,15 @@ Function FilterArr(ByRef arr(), ParamArray args()) As Variant
         Exit Function
     End If
 
-    Dim rowNo&
+    Dim rowNum&
     ReDim filteredArr(0 To rowsCount - 1, LBound(arr, 2) To UBound(arr, 2))
 
     ' отбираем строки, которые были ранее помечены как подходящие
     For i = LBound(arr, 1) To UBound(arr, 1)
         If checksArr(i) Then
-            rowNo = rowNo + 1
+            rowNum = rowNum + 1
             For j = LBound(arr, 2) To UBound(arr, 2)
-                filteredArr(rowNo - 1, j) = arr(i, j)
+                filteredArr(rowNum - 1, j) = arr(i, j)
             Next j
         End If
     Next i
