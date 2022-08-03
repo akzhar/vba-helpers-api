@@ -1,7 +1,7 @@
 Attribute VB_Name = "Helper24"
 Option Explicit
 
-Sub ExportVBProject()
+Function ExportVBProject()
     ' ф-ция экспортирует VBProject файлы из выбранного Excel файла в папку с именем macros
 
     Const FOLDER_NAME$ = "macros"
@@ -33,4 +33,4 @@ Sub ExportVBProject()
 
     MsgBox "Готово", vbInformation
     
-End Sub
+End Function
