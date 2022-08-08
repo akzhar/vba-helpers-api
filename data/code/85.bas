@@ -2,6 +2,7 @@ Attribute VB_Name = "Helper85"
 Option Explicit
 
 Function SetComment(ByRef rng As Range, ByVal flag As Boolean, Optional ByVal comment$ = "", Optional isVisible As Boolean = False)
+    ' ф-ция добавляет / удаляет комментарий к ячейке
     
     If flag Then
     
@@ -12,9 +13,8 @@ Function SetComment(ByRef rng As Range, ByVal flag As Boolean, Optional ByVal co
             .comment.Visible = isVisible
             .comment.Text Text:=comment
             .comment.Shape.TextFrame.Characters.Font.Size = 12
+            .comment.Shape.TextFrame.AutoSize = True
         End With
-        
-        Call FitComments ' @(id 52)
     
     Else
     
