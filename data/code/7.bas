@@ -1,12 +1,13 @@
 Attribute VB_Name = "Helper7"
 Option Explicit
 
-Function FilterArr(ByRef arr(), ParamArray args()) As Variant()
+Function Filter2DArr(ByRef arr(), ParamArray args()) As Variant()
     ' ф-ция фильтрует многомерный массив arr, используя массив критериев фильтрации args
     ' формат критерия: "номер столбца" & "=" & "искомое значение", например, "3=маска текста"
     ' возвращает двумерный массив с подходящими строками из массива arr
+    Filter2DArr = Array()
+    
     On Error Resume Next
-    FilterArr = Array()
 
     If UBound(args) = -1 Then
         Debug.Print "Error: filters required"
@@ -86,5 +87,5 @@ Function FilterArr(ByRef arr(), ParamArray args()) As Variant()
         End If
     Next i
 
-    FilterArr = filteredArr
+    Filter2DArr = filteredArr
 End Function
