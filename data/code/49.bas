@@ -1,18 +1,21 @@
 Attribute VB_Name = "Helper49"
 Option Explicit
 
-Function Round(ByVal number As Double, ByVal numDigits&) As Double
+Function Round(ByVal strNumber$, ByVal numDigits&) As String
     ' ф-ция округляет переданное дробное число number до N знаков после разделителя
 
-    Dim strNumber$: strNumber = CStr(number)
     Dim delimiter$: delimiter = Application.DecimalSeparator
     Dim delimiterPos As Integer: delimiterPos = InStr(1, strNumber, delimiter, vbTextCompare)
 
     If delimiterPos = 0 Then
-        Round = number
+        Round = strNumber
     Else
         Dim leftPart&: leftPart = CLng(Left(strNumber, delimiterPos))
         Dim decimalPart$: decimalPart = Right(strNumber, Len(strNumber) - delimiterPos)
+        Dim ePos&: ePos = InStr(1, LCase(decimalPart), "e+")
+        If ePos > 0 Then
+            decimalPart = Left(decimalPart, ePos - 1)
+        End If
         
         Dim isNegative As Boolean: isNegative = InStr(1, leftPart, "-", vbTextCompare) <> 0
         
