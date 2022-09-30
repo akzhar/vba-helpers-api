@@ -2,8 +2,7 @@ Attribute VB_Name = "Helper25"
 Option Explicit
 
 Function GetFolderPath(ByVal titleMessage$, Optional ByVal defaultPath$ = "") As String
-    ' ф-ция открывает окно для выбора папки
-    ' возвращает путь к выбранной папке
+    ' Allows to select folder in dialog window
     
     Dim folderPath$: folderPath = ""
     Dim dialog As FileDialog: Set dialog = Application.FileDialog(msoFileDialogFolderPicker)

@@ -2,7 +2,8 @@ Attribute VB_Name = "Helper48"
 Option Explicit
 
 Function FixNumbers(ByRef rng As Range)
-    ' ф-ция исправляет ошибку number stored as text, преобразую каждую ячейку в диапазоне в число
+    ' Fixes number stored as text error
+    
     Dim cell As Range
     Call TurnUpdatesOn(False) ' @(id 51)
     For Each cell In rng

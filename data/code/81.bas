@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper81"
 Option Explicit
 
 Function Collection2Array(ByRef coll As Object) As Variant()
-    ' ф-ция конвертирует коллекцию в массив
+    ' Converts collection to array
 
     Dim i&, arr()
 

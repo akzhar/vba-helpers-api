@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper2"
 Option Explicit
 
 Function GetArrLength(ByRef arr()) As Long
-    ' ф-ция возвращает длину массива arr
+    ' Gets length of the specified array
     If IsEmpty(arr) Then
         GetArrLength = 0
     Else

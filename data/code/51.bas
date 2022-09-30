@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper51"
 Option Explicit
 
 Function TurnUpdatesOn(ByVal flag As Boolean)
-    ' ф-ция вкл / выкл обновление экрана, пересчет формул, события, статус-бар, алерты
+    ' Turns off or on the updates of Excel interface (screen updates, formulas calculation, events, status bar, alerts)
     Application.ScreenUpdating = flag
     Application.Calculation = IIf(flag = True, xlCalculationAutomatic, xlCalculationManual)
     Application.EnableEvents = flag

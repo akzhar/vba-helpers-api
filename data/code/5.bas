@@ -2,8 +2,7 @@ Attribute VB_Name = "Helper5"
 Option Explicit
 
 Function FilterArr(ByRef arr(), ByVal element, Optional ByVal elementPos&) As Variant()
-    ' ф-ция фильтрует 1 или 2 мерный массив
-    ' возвращает 1 мерный массив со всеми вхождениями element в arr
+    ' Filters 1 or 2 dim array
     Dim i&, arrElement, filteredArr()
     
     filteredArr = Array()

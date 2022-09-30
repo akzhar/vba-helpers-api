@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper87"
 Option Explicit
 
 Function BreakLinks(wb As Workbook)
-    ' ф-ция удаляет связи (Edit Links) из переданной Excel книги
+    ' Breaks links in the specified workbook
     Dim linkSource: linkSource = wb.LinkSources(xlLinkTypeExcelLinks)
     On Error Resume Next
     Dim i&

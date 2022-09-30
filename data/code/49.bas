@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper49"
 Option Explicit
 
 Function Round(ByVal strNumber$, ByVal numDigits&) As String
-    ' ф-ция округляет переданное дробное число number до N знаков после разделителя
+    ' Rounds the specified float number to N digits after the decimal separator
 
     Dim delimiter$: delimiter = Application.DecimalSeparator
     Dim delimiterPos As Integer: delimiterPos = InStr(1, strNumber, delimiter, vbTextCompare)

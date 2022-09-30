@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper38"
 Option Explicit
 
 Function Hex2Long(ByVal hexColor$) As Long
-    ' ф-ция конвертирует HEX в RGB long
+    ' Converts HEX color to Long Excel value
     Dim R$, G$, B$
     hexColor = Replace(hexColor, "#", "")
     R = Val("&H" & Mid(hexColor, 1, 2))

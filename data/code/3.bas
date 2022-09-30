@@ -2,8 +2,7 @@ Attribute VB_Name = "Helper3"
 Option Explicit
 
 Function Rng2Array(ByRef rng As Range) As String()
-    ' ф-ция возвращает 1 мерный массив, заполненный значениями из диапазона rng
-    ' все значения приводятся к строке
+    ' Converts range to array
     Dim i&, cell As Range, arr() As String
     
     ReDim arr(rng.Count - 1)

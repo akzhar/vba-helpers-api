@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper90"
 Option Explicit
 
 Function SplitToChunks(ByVal text$, ByVal numOfChars&) As String()
-    ' ф-ция разбивает строку на массив строк заданной длины
+    ' Splits the specified string into an array of strings of a given length
     Dim chunks() As String
     Dim chunk$, count&: count = 0
     Do While Len(text)

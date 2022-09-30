@@ -2,10 +2,7 @@ Attribute VB_Name = "Helper89"
 Option Explicit
 
 Function Filter2DArr(ByRef arr(), ByVal fnName$, ByVal elementPos&) As Variant()
-    ' ф-ция фильтрует 2 мерный массив
-    ' ф-ция с именем fnName будет вызвана с каждым эл-том массива arr (строкой)
-    ' В кач-ве единственного параметра в ф-цию будет передан эл-т строки из столбца под номером elementPos
-    ' если ф-ция fnName возвращает True, строка добавляется в результируюший массив
+    ' Filters 2-dim array using callback checker-function
     
     Filter2DArr = Array()
 
@@ -14,19 +11,16 @@ Function Filter2DArr(ByRef arr(), ByVal fnName$, ByVal elementPos&) As Variant()
     
     Dim rowsCount&, arrElement
     
-    ' проверяем все строки массива
+    ' check all the rows
     For i = LBound(arr, 1) To UBound(arr, 1)
         checksArr(i) = False
-        ' проверяем все строки массива
         arrElement = arr(i, elementPos)
         If Application.Run(fnName, arrElement) Then
             checksArr(i) = True
         End If
-        ' увеличиваем счётчик подходящих строк на 1
         rowsCount = rowsCount - checksArr(i)
     Next i
 
-    ' нет ни одной подходящей строки в массиве
     If rowsCount = 0 Then
         Debug.Print "There are no rows matched filter"
         Exit Function
@@ -36,7 +30,7 @@ Function Filter2DArr(ByRef arr(), ByVal fnName$, ByVal elementPos&) As Variant()
     
     Dim rowNum&, j&
     
-    ' отбираем строки, которые были ранее помечены как подходящие
+    ' collect all the rows which passed filtering
     For i = LBound(arr, 1) To UBound(arr, 1)
         If checksArr(i) Then
             rowNum = rowNum + 1

@@ -1,21 +1,20 @@
 Attribute VB_Name = "Helper80"
 Option Explicit
 
-' Порядковый номер листов
+' Worksheets number
 Const SHEET_1_NO& = 1
 Const SHEET_2_NO& = 2
 
-' Первая ячейка (левый верхний угол) с данными у таблицы на обеих листах
+' Left top cornerof the table on both worksheets
 Const FIRST_ROW& = 2
 Const FIRST_COL& = 1
 
-' Цвета
+' Colors
 Const COLOR_GREEN& = 5296274
 Const COLOR_RED& = 255
 
 Sub CompareTables()
-    ' сверка 2-х одинаковых по структуре таблиц
-    ' разница красится в красный, в комментарий проставляется diff сумма
+    ' Comparison of 2 tables with the same structure (identical headers, quantity and order of columns)
 
     Call TurnUpdatesOn(False) ' @(id 51)
 
@@ -38,7 +37,7 @@ Sub CompareTables()
 
     If iLastCol2 <> iLastCol1 Then
         Call Ended
-        MsgBox "Количество и порядок следования столбцов в 2-х сравниваемых таблицах должны совпадать", vbCritical
+        MsgBox "The number and order of columns in the 2 compared tables must match", vbCritical
         Exit Sub
     End If
 
@@ -58,7 +57,7 @@ Sub CompareTables()
                 cellUnique1.Interior.Color = COLOR_GREEN
                 cellUnique2.Interior.Color = COLOR_GREEN
                 
-                For k = FIRST_COL + 1 To iLastCol1 ' или iLastCol2
+                For k = FIRST_COL + 1 To iLastCol1 ' or iLastCol2
 
                     Set cell1 = ws1.Cells(i, k)
                     Set cell2 = ws2.Cells(j, k)
@@ -74,8 +73,8 @@ Sub CompareTables()
                         cell2.Interior.Color = COLOR_RED
 
                         If IsNumeric(cell1.Value) And IsNumeric(cell2.Value) Then
-                            cell1.AddComment "Разница = " & cell1.Value - cell2.Value
-                            cell2.AddComment "Разница = " & cell2.Value - cell1.Value
+                            cell1.AddComment "Difference = " & cell1.Value - cell2.Value
+                            cell2.AddComment "Difference = " & cell2.Value - cell1.Value
                         End If
 
                     End If
@@ -88,14 +87,14 @@ Sub CompareTables()
 
     Next i
 
-    MsgBox "Сверка 2-х таблиц завершена", vbInformation
+    MsgBox "Comparison of 2 tables completed", vbInformation
 
     Call TurnUpdatesOn(True) ' @(id 51)
 
 End Sub
 
 Sub ResetTables()
-    ' возврат обеих таблиц в исходное состояние
+    ' Returns both tables to their original state
 
     Call TurnUpdatesOn(False) ' @(id 51)
 

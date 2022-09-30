@@ -2,9 +2,7 @@ Attribute VB_Name = "Helper9"
 Option Explicit
 
 Function SortArr(ByRef arr(), ByVal N&, Optional ByVal isDesc As Boolean = True) As Variant()
-    ' ф-ция сортирует переданный 2 мерный массив по столбцу N
-    ' desc: по убыванию, от большего к меньшему (<)
-    ' asc: по возрастанию, от меньшего к большему (>)
+    ' Sorts 2-dim array by specified column N
 
     If N > UBound(arr, 1) Or N < LBound(arr, 1) Then
         MsgBox "Нет такого столбца в массиве", vbExclamation

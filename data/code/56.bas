@@ -2,7 +2,8 @@ Attribute VB_Name = "Helper56"
 Option Explicit
 
 Function SetDropDownList(ByRef rng As Range, ByVal source$)
-    ' ф-ция устанавливает Data Validation с типом List
+    ' Sets dropdown list in the specified range
+
     Select Case True
         Case Includes(source, ",") ' @(id 69)
             source = source
@@ -11,6 +12,7 @@ Function SetDropDownList(ByRef rng As Range, ByVal source$)
         Case Else
             source = "=" & source
     End Select
+    
     With rng.Validation
         .Delete
         .Add Type:=xlValidateList, Formula1:=source

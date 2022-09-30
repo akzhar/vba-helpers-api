@@ -1,22 +1,22 @@
 Attribute VB_Name = "Helper46"
 Option Explicit
 
-Function SendEmail(ByVal subject$, ByVal body$, ByVal sendTo$, Optional ByVal copyTo$, Optional ByVal attachmentPath$ = "", Optional ByVal method$ = "Показать", Optional ByVal importanceType$ = "Низкая")
-    ' ф-ция отправляет письмо в Outlook
+Function SendEmail(ByVal subject$, ByVal body$, ByVal sendTo$, Optional ByVal copyTo$, Optional ByVal attachmentPath$ = "", Optional ByVal method$ = "Show", Optional ByVal importance$ = "Low")
+    ' Sends email in Outlook behalf of the current user
 
     Const OUTLOOK_ITEM_TYPE& = 0
     
-    Dim importance&
+    Dim importanceType&
     
-    Select Case importanceType
-        Case "Высокая"
-            importance = 2
-        Case "Средняя"
-            importance = 1
-        Case "Низкая"
-            importance = 0
+    Select Case importance
+        Case "High"
+            importanceType = 2
+        Case "Medium"
+            importanceType = 1
+        Case "Low"
+            importanceType = 0
         Case Else
-            importance = 0
+            importanceType = 0
     End Select
         
     Dim Outlook As Object: Set Outlook = CreateObject("Outlook.Application")
@@ -30,7 +30,7 @@ Function SendEmail(ByVal subject$, ByVal body$, ByVal sendTo$, Optional ByVal co
             .CC = copyTo
         End If
         .To = sendTo
-        .importance = importance
+        .importance = importanceType
         .subject = subject
         .body = body
 
@@ -39,18 +39,18 @@ Function SendEmail(ByVal subject$, ByVal body$, ByVal sendTo$, Optional ByVal co
         End If
           
         Select Case method
-            Case "Показать"
+            Case "Show"
                 .Display
-                messageEnding = "сформировано"
-            Case "Сохранить"
+                messageEnding = "created"
+            Case "Save"
                 .Save
-                messageEnding = "сохранено в папке Черновики / Drafts"
-            Case "Отправить"
+                messageEnding = "saved to Drafts folder"
+            Case "Send"
                 .Send
-                messageEnding = "отправлено"
+                messageEnding = "sent"
             Case Else
                 .Display
-                messageEnding = "сформировано"
+                messageEnding = "created"
         End Select
     
     End With
@@ -58,6 +58,6 @@ Function SendEmail(ByVal subject$, ByVal body$, ByVal sendTo$, Optional ByVal co
     Set Mail = Nothing
     Set Outlook = Nothing
 
-    MsgBox "Письмо " & messageEnding, vbInformation
+    MsgBox "Email has been " & messageEnding, vbInformation
 
 End Function

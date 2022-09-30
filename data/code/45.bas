@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper45"
 Option Explicit
 
 Function GetCurrentUserEmail() As String
-    ' ф-ция возвращает email текущего пользователя в Outlook
+    ' Gets current user's email from Outlook
     
     Dim objOutlook As Object
     

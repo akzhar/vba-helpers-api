@@ -2,7 +2,8 @@ Attribute VB_Name = "Helper86"
 Option Explicit
 
 Function CopyVBProject(ByRef srcWb As Workbook, ByRef wb As Workbook)
-    ' ф-ция копирует VBProject файлы из текущего Excel файла в другой Excel файл wb (должен быть открыт)
+    ' Copies VBProject modules from one Excel file to another
+    
     Dim separator$: separator = Application.PathSeparator
     Dim pathToSaveVba$: pathToSaveVba = Environ("Temp") & separator
     Dim modulePath$

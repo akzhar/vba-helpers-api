@@ -2,7 +2,8 @@ Attribute VB_Name = "Helper10"
 Option Explicit
 
 Function GetUniqueArr(ByRef arr()) As Variant()
-    ' ф-ция возвращает копию 1 мерного массива arr без повторов
+    ' Get 1-dim array without duplicate values
+    
     Dim uniqueArr(): ReDim uniqueArr(0)
     Dim isDuplicate As Boolean, arrIndex&, newArrIndex&: newArrIndex = 0
     

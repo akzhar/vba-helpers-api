@@ -2,9 +2,7 @@ Attribute VB_Name = "Helper7"
 Option Explicit
 
 Function Filter2DArr(ByRef arr(), ParamArray args()) As Variant()
-    ' ф-ция фильтрует многомерный массив arr, используя массив критериев фильтрации args
-    ' формат критерия: "номер столбца" & "=" & "искомое значение", например, "3=маска текста"
-    ' возвращает двумерный массив с подходящими строками из массива arr
+    ' Filters 2-dim array using an arbitrary number of filtering criteria
     Filter2DArr = Array()
     
     On Error Resume Next
@@ -28,14 +26,14 @@ Function Filter2DArr(ByRef arr(), ParamArray args()) As Variant()
     Dim filtersCount&
     Dim filtersArr(): ReDim filtersArr(UBound(args), 1)
 
-    ' распознаем все параметры фильтрации
+    ' Get all the criteria
     For i = LBound(args) To UBound(args)
         arg = args(i)
         If Not IsMissing(arg) Then
             If arg Like "#*=*" Then
                 filtersCount = filtersCount + 1
-                col = Val(Split(arg, "=")(0)) ' столбец со значением
-                mask = Split(arg, "=", 2)(1) ' маска для значения
+                col = Val(Split(arg, "=")(0)) ' column
+                mask = Split(arg, "=", 2)(1) ' mask
                 filtersArr(i, 0) = col
                 filtersArr(i, 1) = mask
             Else
@@ -52,10 +50,10 @@ Function Filter2DArr(ByRef arr(), ParamArray args()) As Variant()
     Dim rowsCount&, j&
     Dim checksArr() As Boolean: ReDim checksArr(LBound(arr, 1) To UBound(arr, 1))
 
-    ' проверяем все строки массива
+    ' check all the rows
     For i = LBound(arr, 1) To UBound(arr, 1)
         checksArr(i) = True
-        ' перебираем все параметры фильтрации
+        ' check all the criteria for each row
         For j = 1 To filtersCount
             col = filtersArr(j - 1, 0)
             mask = filtersArr(j - 1, 1)
@@ -64,20 +62,18 @@ Function Filter2DArr(ByRef arr(), ParamArray args()) As Variant()
                 Exit For
           End If
       Next j
-      ' увеличиваем счётчик подходящих строк на 1
       rowsCount = rowsCount - checksArr(i)
     Next i
 
-    ' нет ни одной подходящей строки в массиве
     If rowsCount = 0 Then
-        Debug.Print "There are no rows matched filter creterias"
+        Debug.Print "There are no rows matched all the filtering creteria"
         Exit Function
     End If
 
     Dim rowNum&
     ReDim filteredArr(0 To rowsCount - 1, LBound(arr, 2) To UBound(arr, 2))
 
-    ' отбираем строки, которые были ранее помечены как подходящие
+    ' collect all the rows which passed filtering
     For i = LBound(arr, 1) To UBound(arr, 1)
         If checksArr(i) Then
             rowNum = rowNum + 1
@@ -86,6 +82,8 @@ Function Filter2DArr(ByRef arr(), ParamArray args()) As Variant()
             Next j
         End If
     Next i
+
+    On Error GoTo 0
 
     Filter2DArr = filteredArr
 End Function

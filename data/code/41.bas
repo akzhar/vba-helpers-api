@@ -2,7 +2,8 @@ Attribute VB_Name = "Helper41"
 Option Explicit
 
 Function ShowInterface(ByVal flag As Boolean)
-    ' ф-ция скрывает / показывает пользовательский интерфейс Excel
+    ' Hides or shows back Excel user interface (scroll bars, tool bars, status bar etc.)
+    
     With Application
         .ScreenUpdating = False
         .Caption = IIf(flag = True, Empty, "")

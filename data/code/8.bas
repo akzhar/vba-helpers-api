@@ -2,9 +2,7 @@ Attribute VB_Name = "Helper8"
 Option Explicit
 
 Function SortArr(ByRef arr(), Optional ByVal isDesc As Boolean = True) As Variant()
-    ' ф-ция сортирует пузырьком 1 мерный массив arr
-    ' desc: по убыванию, от большего к меньшему (<)
-    ' asc: по возрастанию, от меньшего к большему (>)
+    ' Sorts 1-dim array
     Dim i&, j&, condition As Boolean, temp
     
     For i = LBound(arr) To UBound(arr) - 1

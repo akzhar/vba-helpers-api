@@ -2,8 +2,7 @@ Attribute VB_Name = "Helper62"
 Option Explicit
 
 Function GetFirstRegExpMatch(ByVal text$, ByVal pattern$) As String
-    ' ф-ция проверяет текст с помощью регулярного выражения
-    ' возвращает первое соответствие текста паттерну
+    ' Gets only the 1st regular expression match from the text
     Dim regExp As Object: Set regExp = CreateObject("VBScript.RegExp")
     regExp.Pattern = pattern
     regExp.Global = True

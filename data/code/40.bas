@@ -4,7 +4,7 @@ Option Explicit
 Const PROXY_URL$ = "xxx.proxy.su"
 Dim HttpCodes As Object
 
-Function init()
+Function initHttpCodes()
     Set HttpCodes = CreateObject("Scripting.Dictionary")
     HttpCodes("200") = "OK"
     HttpCodes("400") = "BAD REQUEST"
@@ -13,9 +13,9 @@ Function init()
 End Function
 
 Function HttpQuery(ByVal url$, Optional ByVal method$ = "GET", Optional ByVal contentType$ = "text/plain", Optional ByVal reqBody$) As Variant
-    ' ф-ция выполняет HTTP запрос
+    ' Executes HTTP query
 
-    Call init
+    Call initHttpCodes
     
     Dim req As Object: Set req = CreateObject("WinHttp.WinHttpRequest.5.1")
           
@@ -29,8 +29,8 @@ Function HttpQuery(ByVal url$, Optional ByVal method$ = "GET", Optional ByVal co
     End With
     
     If req.Status <> "200" Then
-        MsgBox "Запрос завершился неудачно." _
-        & vbLf & vbLf & "Статус ответа: " & req.Status & HttpCodes(req.Status), vbExclamation
+        MsgBox "Server response is not OK." _
+        & vbLf & vbLf & "Response status: " & req.Status & HttpCodes(req.Status), vbExclamation
         Exit Function
     End If
     

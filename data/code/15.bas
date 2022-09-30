@@ -2,6 +2,6 @@ Attribute VB_Name = "Helper15"
 Option Explicit
 
 Function GetDateSeparator()
-    ' ф-ция возвращает текущий разделитель дат в зависимости от региональных настроек пользователя
+    ' Gets date separator based on user region settings (locale)
     GetDateSeparator = Excel.Application.International(XlApplicationInternational.xlDateSeparator)
 End Function

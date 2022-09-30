@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper71"
 Option Explicit
 
 Function SplitToChars(ByVal str$) As String()
-    ' ф-ция разбивает строку на массив символов
+    ' Splits the specified string into an array of characters / letters
 
     Dim arr() As String: ReDim arr(Len(str) - 1)
    

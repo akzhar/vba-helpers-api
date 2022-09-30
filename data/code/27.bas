@@ -1,9 +1,10 @@
 Attribute VB_Name = "Helper27"
 Option Explicit
 
-Function ReadTxtFile(ByVal filePath$, Optional ByVal encoding$ = "windows-1251") As String
-    ' ф-ция считывает txt файл в указанной кодировке и возвращает его содержимое
-    On Error Resume Next:
+Function ReadTxtFile(ByVal filePath$, Optional ByVal encoding$ = "utf-8") As String
+    ' Gets file's content in specified encoding from the specified txt file
+
+    On Error Resume Next
     With CreateObject("ADODB.Stream")
         .Type = 2:
         If Len(encoding) Then .Charset = encoding
@@ -12,4 +13,5 @@ Function ReadTxtFile(ByVal filePath$, Optional ByVal encoding$ = "windows-1251")
         ReadTxtFile = .ReadText
         .Close
     End With
+    On Error GoTo 0
 End Function

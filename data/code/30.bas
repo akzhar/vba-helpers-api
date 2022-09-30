@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper30"
 Option Explicit
 
 Function AddBorders(ByRef rng As Range)
-    ' ф-ция добавляет границы у диапазона rng
+    ' Adds borders to range
     rng.Borders(xlEdgeLeft).LineStyle = xlContinuous
     rng.Borders(xlEdgeTop).LineStyle = xlContinuous
     rng.Borders(xlEdgeBottom).LineStyle = xlContinuous

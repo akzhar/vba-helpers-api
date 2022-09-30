@@ -2,16 +2,15 @@ Attribute VB_Name = "Helper47"
 Option Explicit
 
 Function CreateAppointment(ByVal subject$, ByVal body$, ByVal startDate As Date, Optional ByVal recurrenceType$ = "")
-    ' ф-ция создает в календаре текущего пользователя новое событие
+    ' Creates an appointment current user's Outlook calendar
 
     If subject = "" Then
-        MsgBox "Ошибка: пустой заголовок", vbExclamation
+        MsgBox "Error: empty subject", vbExclamation
         Exit Function
     End If
 
-    ' события в календаре не создаются для дат из прошлого
     If startDate < Date Then
-        MsgBox "Ошибка: дата < сегодня", vbExclamation
+        MsgBox "Error: date < today", vbExclamation
         Exit Function
     End If
     
@@ -22,23 +21,20 @@ Function CreateAppointment(ByVal subject$, ByVal body$, ByVal startDate As Date,
     Dim namespaceObj As Object: Set namespaceObj = outlookObj.GetNamespace("MAPI")
     Dim appointments As Object: Set appointments = namespaceObj.GetDefaultFolder(CALENDAR_FOLDER_TYPE).Items
     Dim calendarObj As Object: Set calendarObj = namespaceObj.GetDefaultFolder(CALENDAR_FOLDER_TYPE)
-        
-    ' проверка наличия повторов в календаре
+    
     Dim appointmentItem As Object
     
     For Each appointmentItem In appointments
-        
         If appointmentItem.subject = subject Then
-            MsgBox "Ошибка: событие с таким заголовком уже существует", vbExclamation
+            MsgBox "Error: an event with this header already exists", vbExclamation
             Exit Function
         End If
-    
     Next appointmentItem
 
     Dim newAppointmentItem As Object: Set newAppointmentItem = calendarObj.Items.Add(APPOINTMENT_TYPE)
     
     newAppointmentItem.subject = subject
-    newAppointmentItem.body = IIf(body <> "", body & vbLf & vbLf, "") & "Создано с помощью макроса"
+    newAppointmentItem.body = IIf(body <> "", body & vbLf & vbLf, "") & "Created by macros"
     newAppointmentItem.Start = startDate
     newAppointmentItem.AllDayEvent = True
     
@@ -71,6 +67,6 @@ Function CreateAppointment(ByVal subject$, ByVal body$, ByVal startDate As Date,
     Set newAppointmentItem = Nothing
     Set recurrencePattern = Nothing
     
-    MsgBox "Событие в календаре создано: " & subject & IIf(recurrenceType <> "", " (повтор " & recurrenceType & ")", ""), vbInformation
+    MsgBox "Appointment has been created: " & subject & IIf(recurrenceType <> "", " (reccurence " & recurrenceType & ")", ""), vbInformation
     
 End Function

@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper79"
 Option Explicit
 
 Function ExportPictures(ByRef ws As Worksheet, ByVal pathToSave$)
-    ' ф-ция экспортирует все изображения с листа в указанную папку
+    ' Exports all the pictures from the Excel worksheet to the specified folder
 
     Dim shp As Shape
     Dim counter&: counter =0
@@ -31,6 +31,6 @@ Function ExportPictures(ByRef ws As Worksheet, ByVal pathToSave$)
     
     Call TurnUpdatesOn(True) ' @(id 51)
 
-    MsgBox "Сохранено " & counter & " изображений", vbInformation
+    MsgBox counter & " pictures has been saved", vbInformation
 
 End Function

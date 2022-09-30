@@ -2,7 +2,8 @@ Attribute VB_Name = "Helper11"
 Option Explicit
 
 Function GetIndexOf(ByRef arr(), ByVal element, Optional ByVal elementPos = Null) As Long
-    ' ф-ция возвращает индекс элемента в массиве arr или -1, если эл-та в массиве нет
+    ' Get index of specified element in 1-dim array
+    
     Dim i&, arrElement As Variant
     
     For i = LBound(arr) To UBound(arr)

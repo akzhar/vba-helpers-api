@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper1"
 Option Explicit
 
 Function AddToArr(ByRef arr(), ByVal element)
-    ' ф-ция добавляет element в 1 мерный массив arr
+    ' Adds the specified element in 1 dim array
     If (Not arr) = -1 Then
         ReDim arr(0)
     Else

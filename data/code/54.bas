@@ -1,8 +1,8 @@
 Attribute VB_Name = "Helper54"
 Option Explicit
 
-Function RemoveFilters(ByRef ws As Worksheet)
-    ' ф-ция снимает установленные фильтры с листа
+Function ClearFilters(ByRef ws As Worksheet)
+    ' Clears all autofilters in worksheet
     On Error Resume Next
     ws.ShowAllData
     On Error GoTo 0

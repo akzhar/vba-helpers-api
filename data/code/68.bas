@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper68"
 Option Explicit
 
 Function GetRowByHeader(ByRef ws As Worksheet, ByVal headerValue$, ByVal headerCol&) As Long
-  ' ф-ция возвращает номер строки, в которой был найден заголовок headerValue в столбце headerCol
+  ' Searches for the text in the specified column and returns the number of the row in which it was found
 
   Dim foundRow&: foundRow = 0
   Dim lastRow&: lastRow = GetLastRow(ws, headerCol) ' @(id 64)

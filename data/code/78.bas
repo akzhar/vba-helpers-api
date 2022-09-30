@@ -2,28 +2,26 @@ Attribute VB_Name = "Helper78"
 Option Explicit
 
 Function ValidateInput(ByVal textRequest$, ByVal checkPattern$, ByVal textPattern$, Optional ByVal textWarning$, Optional ByVal defaultInput$) As String
-    ' ф-ция проверяет ввод пользователя и возвращает вводимые данные
+    ' Prompts you to enter a value and checks its correctness using specified pattern
 
     Dim inputData$
     
-    If textWarning <> "" Then textWarning = vbLf & vbLf & "Внимание!" & vbLf & textWarning
+    If textWarning <> "" Then textWarning = vbLf & vbLf & "Warning!" & vbLf & textWarning
 
 SelectData:
 
-    inputData = Trim(InputBox(textRequest & vbLf & vbLf & "Соблюдайте формат ввода: " & textPattern & textWarning, "Введите данные", defaultInput))
-    
-    ' проверка, что ввод не пустой
+    inputData = Trim(InputBox(textRequest & vbLf & vbLf & "Follow the format: " & textPattern & textWarning, "Please type the value", defaultInput))
+
     If inputData = "" Then
-        If MsgBox("Поле ввода пустое." & vbLf & vbLf & "Повторить ввод?", vbYesNo, "Ошибка") = vbYes Then
+        If MsgBox("Empty value." & vbLf & vbLf & "Want to type again?", vbYesNo, "Error") = vbYes Then
             GoTo SelectData
         Else
             Exit Function
         End If
     End If
-    
-    ' проверка, что ввод соответствует формату ввода
+
     If Not inputData Like checkPattern Then
-        If MsgBox("Введенное значение не соответствует формату ввода: " & textPattern & "." & vbLf & vbLf & "Повторить ввод?", vbYesNo, "Ошибка") = vbYes Then
+        If MsgBox("Validation failed: " & textPattern & "." & vbLf & vbLf & "Want to type again?", vbYesNo, "Error") = vbYes Then
             GoTo SelectData
         Else
             Exit Function

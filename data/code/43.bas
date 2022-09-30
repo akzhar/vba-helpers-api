@@ -2,14 +2,14 @@ Attribute VB_Name = "Helper43"
 Option Explicit
 
 Function ShowProcessing(ByVal flag As Boolean)
-    ' ф-ция показывает / скрывает сообщение о выполнении операции в статус баре Excel
-    If flag = True Then
+    ' Shows operation execution message in Excel status bar
+    Select Case flag
+      Case True
         Application.DisplayStatusBar = True
         Application.Cursor = xlWait
-        Application.StatusBar = "Операция выполняется. Пожалуйста, подождите..."
-    End If
-    If flag = False Then
+        Application.StatusBar = "Operation in progress. Please wait..."
+      Case False
         Application.StatusBar = False
         Application.Cursor = xlDefault
-    End If
+    End Select
 End Function

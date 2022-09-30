@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper44"
 Option Explicit
 
 Function LogInfo(ByVal logMessage$)
-    ' ф-ция записывает сообщение в логфайл с указанием даты и времени
+    ' Writes new line in log file with current timestamp
     
     Const LOG_FILE_NAME$ = "Log.txt"
 
@@ -10,11 +10,12 @@ Function LogInfo(ByVal logMessage$)
     Dim logFilePath$: logFilePath = ThisWorkbook.Path & Application.PathSeparator & LOG_FILE_NAME
     Dim logFileNum As Integer: logFileNum = FreeFile
     
-    ' создает файл если его нет
+    ' if there is no log file create it
     Open logFilePath For Append As logFileNum
     
-    ' добавляет информацию в конец файла и закрывает его
+    ' write new line in the end
     Print #logFileNum, timeStamp & " - " & logMessage
     
+    ' close log file
     Close logFileNum
 End Function

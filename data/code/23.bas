@@ -2,9 +2,7 @@ Attribute VB_Name = "Helper23"
 Option Explicit
 
 Function GetFilePaths(ByVal titleMessage$, Optional ByVal extensionFilters$ = "", Optional ByVal defaultPath$ = "", Optional ByVal allowMulti As Boolean = False) As String()
-    ' ф-ция открывает окно для выбора файлов
-    ' возвращает массив с путями к выбранным файлам
-    ' если ничего не выбрано вернет пустой массив
+    ' Allows to select files in dialog window
 
     Dim pathsArr() As String, i&
 

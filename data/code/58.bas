@@ -2,14 +2,16 @@ Attribute VB_Name = "Helper58"
 Option Explicit
 
 Function RefreshPQ(ByVal queryName$)
-    ' ф-ция обновляет Power Query запрос с именем queryName
+    ' Refreshes PowerQuery by name of the query
+
     Dim con As WorkbookConnection
+
     For Each con In ActiveWorkbook.Connections
         If (con.Name = "Query - " & queryName) Then
             With ActiveWorkbook.Connections(con.Name).OLEDBConnection
                 .BackgroundQuery = True
                 .Refresh
-                ' ожидание обновления Power Query
+                ' waiting when Power Query refresh is complete
                 Call WaitRefreshComplete
             End With
         End If
@@ -34,6 +36,6 @@ End Sub
 
 Private Sub DoAfterRefreshComplete()
     
-    MsgBox "Запрос Power Query обновлен"
+    MsgBox "Query has been refreshed"
 
 End Sub

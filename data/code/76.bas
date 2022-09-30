@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper76"
 Option Explicit
 
 Function CONCATIF(ByRef rngToCheck As Range, ByRef rngToConcat As Range, ByVal pattern$, Optional separator$ = " ") As String
-    ' аналог встроенной ф-ции CONCATENATE, но с возможностью задать условие конкатенации
+    ' Performs concatenation of values in a range by the condition
     Application.Volatile True
     Dim cell As Range, str$
     For Each cell In rngToCheck

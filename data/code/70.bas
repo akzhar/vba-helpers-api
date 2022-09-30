@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper70"
 Option Explicit
 
 Function GetFirstWordAfter(ByVal searchWord$, ByVal str$) As String
-    ' ф-ция возвращает первое слово в строке после искомого слова
+    ' Gets the 1st word from the text after the specified word
     
     Dim wordAfter$
     
@@ -15,5 +15,4 @@ Function GetFirstWordAfter(ByVal searchWord$, ByVal str$) As String
     End If
     
     GetFirstWordAfter = wordAfter
-
 End Function

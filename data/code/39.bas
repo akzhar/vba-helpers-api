@@ -2,9 +2,11 @@ Attribute VB_Name = "Helper39"
 Option Explicit
 
 Function GetSelectedRadioBtn(ByVal frameName$) As MSforms.OptionButton
-    ' ф-ция находит и возвращает выбранную radio button по имени ее родителя frameName
+    ' Finds selected radio button inside the specified frame on the specified user form
+
     Dim ctrl As Control: Set ctrl = Nothing
     Dim opt As MSforms.OptionButton
+    
     For Each ctrl In Me.Controls
         If TypeName(ctrl) = "OptionButton" Then
             If ctrl.Parent.Name = frameName Then

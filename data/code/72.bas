@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper72"
 Option Explicit
 
 Function SliceString(ByVal textString$, ByVal beginIndex&, Optional ByVal endIndex&) As String
-    ' ф-ция извлекает подстроку из строки начиная с beginIndex и заканчивая endIndex (нумерация начинается с 1)
+    ' Extracts a substring from the string
     
     If Len(textString) = 0 Then
         SliceString = textString

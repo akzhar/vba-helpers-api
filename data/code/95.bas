@@ -1,7 +1,7 @@
-Attribute VB_Name = "Helper42"
+Attribute VB_Name = "Helper95"
 Option Explicit
 
-' JSON Converter for VBA (c)
+' Logging helpers for VBA (c)
 ' Author: Tim Hall <tim.hall.engr@gmail.com>
-' Repository: https://github.com/VBA-tools/VBA-JSON
+' Repository: https://github.com/VBA-tools/VBA-Log
 ' License: MIT (http://www.opensource.org/licenses/mit-license.php)

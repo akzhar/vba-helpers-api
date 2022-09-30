@@ -4,29 +4,28 @@ Option Explicit
 Public Const VAR_DELIMITER$ = "%"
 
 Private Function GetRegExpPattern(ByVal startRow$, ByVal endRow$) As String
-    ' Ф-ция возвращает паттерн для регулярки
+    ' Returns regexp pattern
     GetRegExpPattern = "(?:" & startRow & "$\s)([\S\s]+?)(?:" & endRow & "$\s?)"
 End Function
 
-Private Function GetPlugsArr(ByVal template$) As Variant()
-    ' Ф-ция возвращает массив уникальных заглушек из шаблона
-    Dim plugsArr(): plugsArr = GetRegExpMatches(template, VAR_DELIMITER & "\w*" & VAR_DELIMITER) ' @(id 60)
-    plugsArr = GetUniqueArr(plugsArr) ' @(id 10)
-    GetPlugsArr = plugsArr
+Private Function GetStubsArr(ByVal template$) As Variant()
+    ' Returns array of stubs from the template
+    Dim stubsArr(): stubsArr = GetRegExpMatches(template, VAR_DELIMITER & "\w*" & VAR_DELIMITER) ' @(id 60)
+    stubsArr = GetUniqueArr(stubsArr) ' @(id 10)
+    GetStubsArr = stubsArr
 End Function
 
 Private Function GetBlockContent(ByVal template$, ByVal startRow$, ByVal endRow$) As String
-    ' Ф-ция возвращает контент блока между строками startRow и endRow
+    ' Returns block between startRow и endRow
     Dim matches(): matches = GetRegExpMatches(template, GetRegExpPattern(startRow, endRow)) ' @(id 60)
     GetBlockContent = ""
-    'If Not matches Is Nothing Then
     If GetArrLength(matches) > 0 Then ' @(id 2)
         GetBlockContent = SliceString(template, InStr(1, template, startRow) + Len(startRow), InStr(1, template, endRow) - 1) ' @(id 72)
     End If
 End Function
 
 Private Sub InsertNewRow(ByRef template$, ByRef rowToInsert$, ByVal afterRow$)
-    ' Вставка новой строки после строки ifStartRow
+    ' Insert new row after ifStartRow
     rowToInsert = IIf(Right(rowToInsert, 1) = vbLf, Left(rowToInsert, Len(rowToInsert) - 1), rowToInsert)
     rowToInsert = IIf(Left(rowToInsert, 1) = vbLf, Right(rowToInsert, Len(rowToInsert) - 1), rowToInsert)
     Dim afterRowPos&: afterRowPos = InStr(1, template, afterRow) + Len(afterRow)
@@ -49,21 +48,18 @@ Private Function GetLoopEndRow(ByVal dataKey$) As String
     GetLoopEndRow = "<!-- STOP LOOP " & VAR_DELIMITER & dataKey & VAR_DELIMITER & " -->"
 End Function
 
-Private Function FillTemplateWithData(ByVal template$, ByRef plugsArr(), ByRef dataMap As Scripting.Dictionary) As String
-    ' Ф-ция подставляет в template данные из map
-    ' Значения из map вставляются на места обозначенные как %key% в шаблоне
-    ' Если эл-т map является массивом, состоящим из map, то для каждого map из этого массива формируется строка по шаблону
-    ' Шаблон строки должен быть расположен в исходном шаблоне между строками loopStartRow и loopEndRow
+Private Function FillTemplateWithData(ByVal template$, ByRef stubsArr(), ByRef dataMap As Scripting.Dictionary) As String
+    ' Fills in the template with data
     
-    Dim plugIndex&
-    For plugIndex = LBound(plugsArr) To UBound(plugsArr)
+    Dim stubIndex&
+    For stubIndex = LBound(stubsArr) To UBound(stubsArr)
         
-        Dim subPlugsArr()
+        Dim subStubsArr()
         Dim dataObj As Scripting.Dictionary
         Dim blockStartRow$, blockEndRow$, rowToInsert$, templateRow$, blockContent$
         Dim isCondition As Boolean, isLoop As Boolean, isValidData As Boolean
         
-        Dim dataKey$: dataKey = plugsArr(plugIndex)
+        Dim dataKey$: dataKey = stubsArr(stubIndex)
         dataKey = Replace(dataKey, VAR_DELIMITER, "")
         
         blockStartRow = GetIfStartRow(dataKey)
@@ -79,8 +75,8 @@ Private Function FillTemplateWithData(ByVal template$, ByRef plugsArr(), ByRef d
             
                 Set dataObj = dataMap(dataKey)
                                 
-                subPlugsArr = GetPlugsArr(blockContent)
-                rowToInsert = FillTemplateWithData(blockContent, subPlugsArr, dataObj)
+                subStubsArr = GetStubsArr(blockContent)
+                rowToInsert = FillTemplateWithData(blockContent, subStubsArr, dataObj)
                 Call InsertNewRow(template, rowToInsert, blockStartRow)
             
             End If
@@ -109,8 +105,8 @@ Private Function FillTemplateWithData(ByVal template$, ByRef plugsArr(), ByRef d
                     Set dataObj = arrElem(arrIndex)
                     
                     If Not dataObj Is Nothing Then
-                        subPlugsArr = GetPlugsArr(blockContent)
-                        rowToInsert = FillTemplateWithData(blockContent, subPlugsArr, dataObj)
+                        subStubsArr = GetStubsArr(blockContent)
+                        rowToInsert = FillTemplateWithData(blockContent, subStubsArr, dataObj)
                         Call InsertNewRow(template, rowToInsert, blockStartRow)
                     End If
                     
@@ -129,7 +125,7 @@ Private Function FillTemplateWithData(ByVal template$, ByRef plugsArr(), ByRef d
             
         End If
         
-    Next plugIndex
+    Next stubIndex
         
     FillTemplateWithData = template
     

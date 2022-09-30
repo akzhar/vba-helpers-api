@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper24"
 Option Explicit
 
 Function ExportVBProject()
-    ' ф-ция экспортирует VBProject файлы из выбранного Excel файла в папку с именем macros
+    ' Exports VBProject modules from the selected Excel workbook
 
     Const FOLDER_NAME$ = "macros"
     Dim arr() As String: arr = GetFilePaths("Выбери файл с VBProject", "*.xlsm; *.xlsb") ' @(id 23)
@@ -31,6 +31,6 @@ Function ExportVBProject()
     
     wb.Close False
 
-    MsgBox "Готово", vbInformation
+    MsgBox "VBProject files export completed", vbInformation
     
 End Function

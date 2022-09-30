@@ -2,7 +2,7 @@ Attribute VB_Name = "Helper26"
 Option Explicit
 
 Function ReadTxtFile(ByVal filePath$) As String
-    ' ф-ция считывает txt файл и возвращает его содержимое
+    ' Gets file's content from the specified txt file
 
     Dim fso As Object: Set fso = CreateObject("Scripting.FileSystemObject")
     Dim srcFile As Object: Set srcFile = fso.OpenTextFile(filePath, 1)
