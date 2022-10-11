@@ -1,8 +1,8 @@
 Attribute VB_Name = "Helper46"
 Option Explicit
 
-Function SendEmail(ByVal subject$, ByVal body$, ByVal sendTo$, Optional ByVal copyTo$, Optional ByVal attachmentPath$ = "", Optional ByVal method$ = "Show", Optional ByVal importance$ = "Low")
-    ' Sends email in Outlook behalf of the current user
+Function CreateEmail(ByVal subject$, ByVal body$, ByVal sendTo$, Optional ByVal copyTo$, Optional ByVal attachmentPath$ = "", Optional ByVal method$ = "Show", Optional ByVal importance$ = "Low")
+    ' Creates email in Outlook behalf of the current user
 
     Const OUTLOOK_ITEM_TYPE& = 0
     
