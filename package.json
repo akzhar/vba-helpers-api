@@ -5,11 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "PORT=3001 node index.js",
+    "service:enable": "systemctl enable vba-helpers-api",
+    "service:start": "systemctl start vba-helpers-api",
+    "service:stop": "systemctl stop vba-helpers-api",
+    "service:restart": "systemctl enable vba-helpers-api",
+    "service:status": "systemctl status vba-helpers-api"
   },
   "keywords": [],
   "author": "akzhar.taov@yandex.ru",
-  "license": "ISC",
   "dependencies": {
     "json-server": "0.17.0"
   }
