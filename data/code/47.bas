@@ -1,8 +1,8 @@
 Attribute VB_Name = "Helper47"
 Option Explicit
 
-Function CreateAppointment(ByVal subject$, ByVal body$, ByVal startDate As Date, Optional ByVal recurrenceType$ = "")
-    ' Creates an appointment current user's Outlook calendar
+Function CreateEvent(ByVal subject$, ByVal body$, ByVal startDate As Date, Optional ByVal recurrenceType$ = "")
+    ' Creates an event current user's Outlook calendar
 
     If subject = "" Then
         MsgBox "Error: empty subject", vbExclamation
@@ -19,24 +19,24 @@ Function CreateAppointment(ByVal subject$, ByVal body$, ByVal startDate As Date,
 
     Dim outlookObj As Object: Set outlookObj = CreateObject("Outlook.Application")
     Dim namespaceObj As Object: Set namespaceObj = outlookObj.GetNamespace("MAPI")
-    Dim appointments As Object: Set appointments = namespaceObj.GetDefaultFolder(CALENDAR_FOLDER_TYPE).Items
+    Dim calendarItemsObj As Object: Set calendarItemsObj = namespaceObj.GetDefaultFolder(CALENDAR_FOLDER_TYPE).Items
     Dim calendarObj As Object: Set calendarObj = namespaceObj.GetDefaultFolder(CALENDAR_FOLDER_TYPE)
     
-    Dim appointmentItem As Object
+    Dim calendarItem As Object
     
-    For Each appointmentItem In appointments
-        If appointmentItem.subject = subject Then
+    For Each calendarItem In calendarItemsObj
+        If calendarItem.subject = subject Then
             MsgBox "Error: an event with this header already exists", vbExclamation
             Exit Function
         End If
-    Next appointmentItem
+    Next calendarItem
 
-    Dim newAppointmentItem As Object: Set newAppointmentItem = calendarObj.Items.Add(APPOINTMENT_TYPE)
+    Dim newEventItem As Object: Set newEventItem = calendarObj.Items.Add(APPOINTMENT_TYPE)
     
-    newAppointmentItem.subject = subject
-    newAppointmentItem.body = IIf(body <> "", body & vbLf & vbLf, "") & "Created by macros"
-    newAppointmentItem.Start = startDate
-    newAppointmentItem.AllDayEvent = True
+    newEventItem.subject = subject
+    newEventItem.body = IIf(body <> "", body & vbLf & vbLf, "") & "Created by macros"
+    newEventItem.Start = startDate
+    newEventItem.AllDayEvent = True
     
     ' периодический повтор задачи
     If recurrenceType <> "" Then
@@ -57,16 +57,16 @@ Function CreateAppointment(ByVal subject$, ByVal body$, ByVal startDate As Date,
         
     End If
     
-    newAppointmentItem.Save
+    newEventItem.Save
     
     Set outlookObj = Nothing
     Set namespaceObj = Nothing
-    Set appointments = Nothing
+    Set calendarItemsObj = Nothing
     Set calendarObj = Nothing
-    Set appointmentItem = Nothing
-    Set newAppointmentItem = Nothing
+    Set calendarItem = Nothing
+    Set newEventItem = Nothing
     Set recurrencePattern = Nothing
     
-    MsgBox "Appointment has been created: " & subject & IIf(recurrenceType <> "", " (reccurence " & recurrenceType & ")", ""), vbInformation
+    MsgBox "Event has been created: " & subject & IIf(recurrenceType <> "", " (reccurence " & recurrenceType & ")", ""), vbInformation
     
 End Function

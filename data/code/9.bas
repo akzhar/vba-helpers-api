@@ -1,7 +1,7 @@
 Attribute VB_Name = "Helper9"
 Option Explicit
 
-Function SortArr(ByRef arr(), ByVal N&, Optional ByVal isDesc As Boolean = True) As Variant()
+Function Sort2DArr(ByRef arr(), ByVal N&, Optional ByVal isDesc As Boolean = True) As Variant()
     ' Sorts 2-dim array by specified column N
 
     If N > UBound(arr, 1) Or N < LBound(arr, 1) Then
@@ -32,5 +32,5 @@ Function SortArr(ByRef arr(), ByVal N&, Optional ByVal isDesc As Boolean = True)
         Next i
     Loop
 
-    SortArr = arr
+    Sort2DArr = arr
 End Function
