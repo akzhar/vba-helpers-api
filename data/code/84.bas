@@ -1,132 +1,224 @@
 Attribute VB_Name = "Helper84"
 Option Explicit
 
-Public Const VAR_DELIMITER$ = "%"
+Const STUB_DELIMITER$ = "%"
 
-Private Function GetRegExpPattern(ByVal startRow$, ByVal endRow$) As String
-    ' Returns regexp pattern
-    GetRegExpPattern = "(?:" & startRow & "$\s)([\S\s]+?)(?:" & endRow & "$\s?)"
+Private Function GetIfStartRow(ByVal datakey$) As String
+    GetIfStartRow = "<!-- IF HAS " & STUB_DELIMITER & datakey & STUB_DELIMITER & " -->"
+Private End Function
+
+Private Function GetIfEndRow(ByVal datakey$) As String
+    GetIfEndRow = "<!-- END IF " & STUB_DELIMITER & datakey & STUB_DELIMITER & " -->"
 End Function
 
-Private Function GetStubsArr(ByVal template$) As Variant()
+Private Function GetLoopStartRow(ByVal datakey$) As String
+    GetLoopStartRow = "<!-- LOOP EACH " & STUB_DELIMITER & datakey & STUB_DELIMITER & " -->"
+End Function
+
+Private Function GetLoopEndRow(ByVal datakey$) As String
+    GetLoopEndRow = "<!-- STOP LOOP " & STUB_DELIMITER & datakey & STUB_DELIMITER & " -->"
+End Function
+
+Private Function RemoveStubDelimiters(ByVal datakey$) As String
+    RemoveStubDelimiters = Replace(datakey, STUB_DELIMITER, "")
+End Function
+
+Private Function GetBlockContents(ByVal template$, ByVal startRowPattern$, ByVal endRowPattern$, Optional isGreedy As Boolean = False) As Variant()
+    ' Returns 2D arr(N)(3) - N matches, 3 items for every match (startRow, block between, endRow)
+    Dim regExpPattern$: regExpPattern = "(" & startRowPattern & "\s?)([\s\S]+" & IIf(isGreedy, "", "?") & ")(" & endRowPattern & "\s?)"
+    Dim matches(): matches = GetRegExpSubMatches(template, regExpPattern) ' @(id 98)
+    If GetArrLength(matches) > 0 Then ' @(id 2)
+        GetBlockContents = matches
+    Else
+        GetBlockContents = Array()
+    End If
+End Function
+
+Function GetStubsArr(ByVal template$) As Variant()
     ' Returns array of stubs from the template
-    Dim stubsArr(): stubsArr = GetRegExpMatches(template, VAR_DELIMITER & "\w*" & VAR_DELIMITER) ' @(id 60)
+    Dim stubsArr(): stubsArr = GetRegExpMatches(template, STUB_DELIMITER & "\??" & "[а-яА-Яa-zA-Z0-9_]*" & STUB_DELIMITER) ' @(id 60)
     stubsArr = GetUniqueArr(stubsArr) ' @(id 10)
     GetStubsArr = stubsArr
 End Function
 
-Private Function GetBlockContent(ByVal template$, ByVal startRow$, ByVal endRow$) As String
-    ' Returns block between startRow и endRow
-    Dim matches(): matches = GetRegExpMatches(template, GetRegExpPattern(startRow, endRow)) ' @(id 60)
-    GetBlockContent = ""
-    If GetArrLength(matches) > 0 Then ' @(id 2)
-        GetBlockContent = SliceString(template, InStr(1, template, startRow) + Len(startRow), InStr(1, template, endRow) - 1) ' @(id 72)
+Function CleanResult(ByVal template$) As String
+    ' Remove technical (IF, LOOP) and empty lines
+    
+    Dim key$, blockStartRow$, blockEndRow$
+    Dim arr(), i&
+    
+    key = "[а-яА-Яa-zA-Z0-9_]+"
+    
+    blockStartRow = GetIfStartRow(key)
+    blockEndRow = GetIfEndRow(key)
+    arr = CombineArrays(arr, GetRegExpMatches(template, blockStartRow)) ' @(id 93) @(id 60)
+    arr = CombineArrays(arr, GetRegExpMatches(template, blockEndRow)) ' @(id 93) @(id 60)
+    
+    blockStartRow = GetLoopStartRow(key)
+    blockEndRow = GetLoopEndRow(key)
+    arr = CombineArrays(arr, GetRegExpMatches(template, blockStartRow)) ' @(id 93) @(id 60)
+    arr = CombineArrays(arr, GetRegExpMatches(template, blockEndRow)) ' @(id 93) @(id 60)
+    
+    If (Not arr) <> -1 Then
+        For i = LBound(arr) To UBound(arr)
+            template = Replace(template, arr(i), "")
+        Next i
     End If
+    
+    template = Application.WorksheetFunction.Clean(template)
+    
+    CleanResult = template
+
 End Function
 
-Private Sub InsertNewRow(ByRef template$, ByRef rowToInsert$, ByVal afterRow$)
-    ' Insert new row after ifStartRow
-    rowToInsert = IIf(Right(rowToInsert, 1) = vbLf, Left(rowToInsert, Len(rowToInsert) - 1), rowToInsert)
-    rowToInsert = IIf(Left(rowToInsert, 1) = vbLf, Right(rowToInsert, Len(rowToInsert) - 1), rowToInsert)
-    Dim afterRowPos&: afterRowPos = InStr(1, template, afterRow) + Len(afterRow)
-    template = Left(template, afterRowPos - 1) & vbLf & rowToInsert & Mid(template, afterRowPos)
-End Sub
-
-Private Function GetIfStartRow(ByVal dataKey$) As String
-    GetIfStartRow = "<!-- IF HAS " & VAR_DELIMITER & dataKey & VAR_DELIMITER & " -->"
-End Function
-
-Private Function GetIfEndRow(ByVal dataKey$) As String
-    GetIfEndRow = "<!-- END IF " & VAR_DELIMITER & dataKey & VAR_DELIMITER & " -->"
-End Function
-
-Private Function GetLoopStartRow(ByVal dataKey$) As String
-    GetLoopStartRow = "<!-- LOOP EACH " & VAR_DELIMITER & dataKey & VAR_DELIMITER & " -->"
-End Function
-
-Private Function GetLoopEndRow(ByVal dataKey$) As String
-    GetLoopEndRow = "<!-- STOP LOOP " & VAR_DELIMITER & dataKey & VAR_DELIMITER & " -->"
-End Function
-
-Private Function FillTemplateWithData(ByVal template$, ByRef stubsArr(), ByRef dataMap As Scripting.Dictionary) As String
+Function InsertData2XmlTemplate(ByVal template$, ByRef stubsArr(), ByRef dataMap As Scripting.Dictionary) As String
     ' Fills in the template with data
     
     Dim stubIndex&
     For stubIndex = LBound(stubsArr) To UBound(stubsArr)
         
-        Dim subStubsArr()
-        Dim dataObj As Scripting.Dictionary
-        Dim blockStartRow$, blockEndRow$, rowToInsert$, templateRow$, blockContent$
-        Dim isCondition As Boolean, isLoop As Boolean, isValidData As Boolean
+        Dim subStubsArr(), matches(), subDataMap As Scripting.Dictionary
+        Dim blockStartRow$, blockEndRow$, blockContent$, rowToInsert$, rowsToInsert$, templateRow$
+        Dim isCondition As Boolean, isLoop As Boolean, isValidData As Boolean, isOptional As Boolean
         
-        Dim dataKey$: dataKey = stubsArr(stubIndex)
-        dataKey = Replace(dataKey, VAR_DELIMITER, "")
+        Dim datakey$: datakey = stubsArr(stubIndex)
+        datakey = RemoveStubDelimiters(datakey)
         
-        blockStartRow = GetIfStartRow(dataKey)
-        blockEndRow = GetIfEndRow(dataKey)
-        blockContent = GetBlockContent(template, blockStartRow, blockEndRow)
+        isCondition = CBool(Left(datakey, 3) = "has")
+        isLoop = CBool(Left(datakey, 4) = "each")
         
-        isCondition = CBool(blockContent <> "" And InStr(1, blockContent, VAR_DELIMITER) > 0)
-        isValidData = CBool(TypeName(dataMap(dataKey)) = "Dictionary")
-            
-        If isCondition Then
-            
-            If Not IsEmpty(dataMap(dataKey)) And isValidData Then
-            
-                Set dataObj = dataMap(dataKey)
-                                
-                subStubsArr = GetStubsArr(blockContent)
-                rowToInsert = FillTemplateWithData(blockContent, subStubsArr, dataObj)
-                Call InsertNewRow(template, rowToInsert, blockStartRow)
-            
+        Select Case (True)
+            Case isCondition
+                blockStartRow = GetIfStartRow(datakey)
+                blockEndRow = GetIfEndRow(datakey)
+            Case isLoop
+                blockStartRow = GetLoopStartRow(datakey)
+                blockEndRow = GetLoopEndRow(datakey)
+        End Select
+        
+        blockContent = ""
+        
+        If isCondition Or isLoop Then
+            matches = GetBlockContents(template, blockStartRow, blockEndRow)
+            If GetArrLength(matches) > 0 Then ' @(id 2)
+                blockContent = matches(0)(1)
             End If
-                    
-            ' Delete IF template block
-            template = Replace(template, blockContent, "")
-                
         End If
         
-        blockStartRow = GetLoopStartRow(dataKey)
-        blockEndRow = GetLoopEndRow(dataKey)
-        blockContent = GetBlockContent(template, blockStartRow, blockEndRow)
+        If dataMap.Exists(datakey) Then
         
-        isLoop = CBool(blockContent <> "" And InStr(1, blockContent, VAR_DELIMITER) > 0)
-        isValidData = IsArray(dataMap(dataKey))
-        
-        If isLoop Then
+            Select Case (True)
             
-            If Not IsEmpty(dataMap(dataKey)) And isValidData Then
-            
-                Dim arrElem() As Scripting.Dictionary: arrElem = dataMap(dataKey)
-                       
-                Dim arrIndex&
-                For arrIndex = UBound(arrElem) To 0 Step -1
+                Case isCondition
                     
-                    Set dataObj = arrElem(arrIndex)
+                    isValidData = CBool(typeName(dataMap(datakey)) = "Dictionary" And dataMap(datakey).Count > 0)
                     
-                    If Not dataObj Is Nothing Then
-                        subStubsArr = GetStubsArr(blockContent)
-                        rowToInsert = FillTemplateWithData(blockContent, subStubsArr, dataObj)
-                        Call InsertNewRow(template, rowToInsert, blockStartRow)
+                    If isValidData Then
+                    
+                        Set subDataMap = dataMap(datakey)
+                                        
+                        subStubsArr = GetSubStubsArr(blockContent, subDataMap)
+                        rowToInsert = InsertData2XmlTemplate(blockContent, subStubsArr, subDataMap)
+                        Call InsertNewRow(template, rowToInsert, blockStartRow, blockContent)
+                    
+                    Else
+                    
+                        template = RemoveEmptyBlock(template, blockContent)
+                        
                     End If
                     
-                Next arrIndex
+                Case isLoop
+                        
+                    isValidData = CBool(IsArray(dataMap(datakey)) And UBound(dataMap(datakey)) > -1)
                 
-            End If
-            
-            ' Delete LOOP template block
-            template = Replace(template, blockContent, "")
-            
-        End If
+                    If isValidData Then
+                    
+                        Dim arrElem() As Scripting.Dictionary: arrElem = dataMap(datakey)
+                               
+                        Dim arrIndex&
+                        For arrIndex = UBound(arrElem) To 0 Step -1
+                            
+                            Set subDataMap = arrElem(arrIndex)
+                            
+                            If Not subDataMap Is Nothing Then
+                            
+                                subStubsArr = GetSubStubsArr(blockContent, subDataMap)
+                                rowToInsert = InsertData2XmlTemplate(blockContent, subStubsArr, subDataMap)
+                                rowsToInsert = rowsToInsert & vbLf & rowToInsert
+                                
+                            End If
+                            
+                        Next arrIndex
+                        
+                        Call InsertNewRow(template, rowsToInsert, blockStartRow, blockContent)
+                        rowsToInsert = ""
+                        
+                    Else
+                    
+                        template = RemoveEmptyBlock(template, blockContent)
+                        
+                    End If
+                    
+                Case Else
+                
+                    isOptional = IIf(Left(datakey, 1) = "?", True, False)
         
-        If Not isCondition And Not isLoop Then
+                    Dim val$: val = dataMap(datakey)
+                    Dim key$: key = STUB_DELIMITER & datakey & STUB_DELIMITER
+                    
+                    If isOptional And val = "" Then
+                        Dim arr() As String: arr = Split(key, "_")
+                        Dim tag$: tag = arr(0)
+                        Dim atr$: atr = arr(1)
+                        tag = Right(tag, Len(tag) - 1)
+                        atr = Left(atr, Len(atr) - 1)
+                        key = " " & atr & "=""" & key & """"
+                    End If
+                    
+                    template = Replace(template, key, val, , 1)
+            
+            End Select
+            
+        Else
+            
+            template = RemoveEmptyBlock(template, blockContent)
 
-            template = Replace(template, VAR_DELIMITER & dataKey & VAR_DELIMITER, dataMap(dataKey))
-            
         End If
-        
+            
     Next stubIndex
         
-    FillTemplateWithData = template
+    InsertData2XmlTemplate = template
     
+End Function
+
+Private Function GetSubStubsArr(ByVal template$, ByRef dataMap As Scripting.Dictionary) As Variant()
+    ' Returns array of stubs from the template
+    Dim stubsArr(), datakey
+    For Each datakey In dataMap.Keys()
+        Dim stub$: stub = GetFirstRegExpMatch(template, STUB_DELIMITER & "\??" & datakey & STUB_DELIMITER) ' @(id 62)
+        Call AddToArr(stubsArr, stub) ' @(id 1)
+    Next datakey
+    GetSubStubsArr = stubsArr
+End Function
+
+Private Sub InsertNewRow(ByRef template$, ByRef rowToInsert$, ByVal afterRow$, ByVal blockContent$)
+    ' Insert new row after ifStartRow
+    rowToInsert = IIf(Right(rowToInsert, 1) = vbLf, Left(rowToInsert, Len(rowToInsert) - 1), rowToInsert)
+    rowToInsert = IIf(Left(rowToInsert, 1) = vbLf, Right(rowToInsert, Len(rowToInsert) - 1), rowToInsert)
+    Dim afterRowPos&: afterRowPos = InStr(1, template, afterRow) + Len(afterRow)
+    Dim upperPart$: upperPart = Left(template, afterRowPos - 1)
+    Dim lowerPart$: lowerPart = Mid(template, afterRowPos)
+    lowerPart = Replace(lowerPart, blockContent, "", , 1)
+    template = upperPart & vbLf & rowToInsert & lowerPart
+End Sub
+
+Private Function RemoveEmptyBlock(ByVal template$, ByVal block$) As String
+    
+    ' Delete template block if no data provided
+    If block <> "" Then
+        template = Replace(template, block, "", , 1)
+    End If
+    
+    RemoveEmptyBlock = template
+
 End Function
