@@ -5,7 +5,7 @@ Const STUB_DELIMITER$ = "%"
 
 Private Function GetIfStartRow(ByVal datakey$) As String
     GetIfStartRow = "<!-- IF HAS " & STUB_DELIMITER & datakey & STUB_DELIMITER & " -->"
-Private End Function
+End Function
 
 Private Function GetIfEndRow(ByVal datakey$) As String
     GetIfEndRow = "<!-- END IF " & STUB_DELIMITER & datakey & STUB_DELIMITER & " -->"
