@@ -24,10 +24,55 @@ Option Explicit
 
 ' End Function
 
-Function GetADInfo(ByVal objectClass$, ByVal searchByAttr$, ByVal searchString$, ByVal returnAttr$) As Variant
-    ' Gets Active Directory attribute value
+Const LDAP_DOMAIN$ = "LDAP://dc=sub, dc=example, dc=com"
+
+Function GetADInfo(ByVal objectClass$, ByVal searchByAttr$, ByVal searchString$, ByVal returnAttr$) As Variant()
+    ' Gets Active Directory attribute value (array of matches)
     
-    Const LDAP_DOMAIN$ = "LDAP://dc=sub, dc=example, dc=com"
+    Dim objConnection As Object: Set objConnection = CreateObject("ADODB.Connection")
+    objConnection.Open "Provider=ADsDSOObject;"
+    Dim adoCommand As Object: Set adoCommand = CreateObject("ADODB.Command")
+    adoCommand.ActiveConnection = objConnection
+    
+    Dim ldapFilter$
+    
+    Select Case objectClass
+        Case "users"
+            ldapFilter = "(&(|(objectClass=user)(objectClass=person))(!(objectClass=computer))(!(objectClass=group)))"
+        Case "groups"
+            ldapFilter = "(&(objectClass=group)(!(objectClass=computer))(!(objectClass=user))(!(objectClass=person)))"
+        Case "computers"
+            ldapFilter = "(objectClass=computer)"
+    End Select
+        
+    adoCommand.CommandText = "<" & LDAP_DOMAIN & ">;" _
+    & "(&" & ldapFilter & "(" & searchByAttr & "=" & searchString & "));" _
+    & searchByAttr & "," & returnAttr & ";subtree"
+    
+    Dim objRecordSet: Set objRecordSet = adoCommand.Execute
+    
+    Dim arr()
+    
+    If objRecordSet.RecordCount > 0 Then
+        Dim i&, item$
+        For i = 1 To objRecordSet.RecordCount
+            item = objRecordSet.Fields(returnAttr)
+            Call AddToArr(arr, item) ' @(id 1)
+            objRecordSet.MoveNext
+        Next i
+    End If
+    
+    GetADInfo = arr
+    
+    objConnection.Close
+    Set objRecordSet = Nothing
+    Set adoCommand = Nothing
+    Set objConnection = Nothing
+
+End Function
+
+Function GetADInfo(ByVal objectClass$, ByVal searchByAttr$, ByVal searchString$, ByVal returnAttr$) As Variant
+    ' Gets Active Directory attribute value (first match only)
     
     Dim objConnection As Object: Set objConnection = CreateObject("ADODB.Connection")
     objConnection.Open "Provider=ADsDSOObject;"
