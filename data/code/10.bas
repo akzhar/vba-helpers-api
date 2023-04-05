@@ -8,7 +8,7 @@ Function GetUniqueArr(ByRef arr()) As Variant()
     Dim isDuplicate As Boolean, arrIndex&, newArrIndex&: newArrIndex = 0
     
     For arrIndex = LBound(arr) To UBound(arr)
-        isDuplicate = IsInArray(uniqueArr, arr(arrIndex)) ' @(id 4)
+        isDuplicate = IsInArray(uniqueArr, arr(arrIndex)) ' @dependency: 4.bas
         If Not isDuplicate Then
             ReDim Preserve uniqueArr(newArrIndex)
             uniqueArr(newArrIndex) = arr(arrIndex)

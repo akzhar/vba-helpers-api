@@ -5,9 +5,9 @@ Function SetDropDownList(ByRef rng As Range, ByVal source$)
     ' Sets dropdown list in the specified range
 
     Select Case True
-        Case Includes(source, ",") ' @(id 69)
+        Case Includes(source, ",") ' @dependency: 69.bas
             source = source
-        Case Includes(source, "[") And Includes(source, "]") ' @(id 69)
+        Case Includes(source, "[") And Includes(source, "]") ' @dependency: 69.bas
             source = "=INDIRECT(""" & source & """)"
         Case Else
             source = "=" & source

@@ -9,7 +9,7 @@ Function GetSelectedRows() As Variant()
     
     For i = LBound(selectedRanges) To UBound(selectedRanges)
         Erase rngBounds: rngBounds = Split(selectedRanges(i), ":")
-        Erase rngRows: rngRows = GetRegExpMatches(selectedRanges(i), "\d+") ' @(id 60)
+        Erase rngRows: rngRows = GetRegExpMatches(selectedRanges(i), "\d+") ' @dependency: 60.bas
         isRange = False
         If UBound(rngBounds) > 0 Then
             isRange = InStr(1, selectedRanges(i), ":") And rngBounds(0) <> rngBounds(1)
@@ -18,12 +18,12 @@ Function GetSelectedRows() As Variant()
             For j = CLng(rngRows(0)) To CLng(rngRows(1))
                 rowNum = j
                 If Not ActiveSheet.rows(rowNum).EntireRow.Hidden Then
-                    Call AddToArr(selectedRows, rowNum) ' @(id 1)
+                    Call AddToArr(selectedRows, rowNum) ' @dependency: 1.bas
                 End If
             Next j
         Else
             rowNum = CLng(rngRows(0))
-            Call AddToArr(selectedRows, rowNum) ' @(id 1)
+            Call AddToArr(selectedRows, rowNum) ' @dependency: 1.bas
         End If
     Next i
     GetSelectedRows = selectedRows

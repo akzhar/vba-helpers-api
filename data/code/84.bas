@@ -26,8 +26,8 @@ End Function
 Private Function GetBlockContents(ByVal template$, ByVal startRowPattern$, ByVal endRowPattern$, Optional isGreedy As Boolean = False) As Variant()
     ' Returns 2D arr(N)(3) - N matches, 3 items for every match (startRow, block between, endRow)
     Dim regExpPattern$: regExpPattern = "(" & startRowPattern & "\s?)([\s\S]+" & IIf(isGreedy, "", "?") & ")(" & endRowPattern & "\s?)"
-    Dim matches(): matches = GetRegExpSubMatches(template, regExpPattern) ' @(id 98)
-    If GetArrLength(matches) > 0 Then ' @(id 2)
+    Dim matches(): matches = GetRegExpSubMatches(template, regExpPattern) ' @dependency: 98.bas
+    If GetArrLength(matches) > 0 Then ' @dependency: 2.bas
         GetBlockContents = matches
     Else
         GetBlockContents = Array()
@@ -36,8 +36,8 @@ End Function
 
 Function GetStubsArr(ByVal template$) As Variant()
     ' Returns array of stubs from the template
-    Dim stubsArr(): stubsArr = GetRegExpMatches(template, STUB_DELIMITER & "\??" & "[а-яА-Яa-zA-Z0-9_]*" & STUB_DELIMITER) ' @(id 60)
-    stubsArr = GetUniqueArr(stubsArr) ' @(id 10)
+    Dim stubsArr(): stubsArr = GetRegExpMatches(template, STUB_DELIMITER & "\??" & "[а-яА-Яa-zA-Z0-9_]*" & STUB_DELIMITER) ' @dependency: 60.bas
+    stubsArr = GetUniqueArr(stubsArr) ' @dependency: 10.bas
     GetStubsArr = stubsArr
 End Function
 
@@ -51,13 +51,13 @@ Function CleanResult(ByVal template$) As String
     
     blockStartRow = GetIfStartRow(key)
     blockEndRow = GetIfEndRow(key)
-    arr = CombineArrays(arr, GetRegExpMatches(template, blockStartRow)) ' @(id 93) @(id 60)
-    arr = CombineArrays(arr, GetRegExpMatches(template, blockEndRow)) ' @(id 93) @(id 60)
+    arr = CombineArrays(arr, GetRegExpMatches(template, blockStartRow)) ' @dependency: 93.bas @dependency: 60.bas
+    arr = CombineArrays(arr, GetRegExpMatches(template, blockEndRow)) ' @dependency: 93.bas @dependency: 60.bas
     
     blockStartRow = GetLoopStartRow(key)
     blockEndRow = GetLoopEndRow(key)
-    arr = CombineArrays(arr, GetRegExpMatches(template, blockStartRow)) ' @(id 93) @(id 60)
-    arr = CombineArrays(arr, GetRegExpMatches(template, blockEndRow)) ' @(id 93) @(id 60)
+    arr = CombineArrays(arr, GetRegExpMatches(template, blockStartRow)) ' @dependency: 93.bas @dependency: 60.bas
+    arr = CombineArrays(arr, GetRegExpMatches(template, blockEndRow)) ' @dependency: 93.bas @dependency: 60.bas
     
     If (Not arr) <> -1 Then
         For i = LBound(arr) To UBound(arr)
@@ -100,7 +100,7 @@ Function InsertData2XmlTemplate(ByVal template$, ByRef stubsArr(), ByRef dataMap
         
         If isCondition Or isLoop Then
             matches = GetBlockContents(template, blockStartRow, blockEndRow)
-            If GetArrLength(matches) > 0 Then ' @(id 2)
+            If GetArrLength(matches) > 0 Then ' @dependency: 2.bas
                 blockContent = matches(0)(1)
             End If
         End If
@@ -195,8 +195,8 @@ Private Function GetSubStubsArr(ByVal template$, ByRef dataMap As Scripting.Dict
     ' Returns array of stubs from the template
     Dim stubsArr(), datakey
     For Each datakey In dataMap.Keys()
-        Dim stub$: stub = GetFirstRegExpMatch(template, STUB_DELIMITER & "\??" & datakey & STUB_DELIMITER) ' @(id 62)
-        Call AddToArr(stubsArr, stub) ' @(id 1)
+        Dim stub$: stub = GetFirstRegExpMatch(template, STUB_DELIMITER & "\??" & datakey & STUB_DELIMITER) ' @dependency: 62.bas
+        Call AddToArr(stubsArr, stub) ' @dependency: 1.bas
     Next datakey
     GetSubStubsArr = stubsArr
 End Function

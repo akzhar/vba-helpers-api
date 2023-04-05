@@ -10,7 +10,7 @@ Option Explicit
 '     For i = LBound(members) To UBound(members)
     
 '         userLogin = GetAdUserLogin(members(i))
-'         Call AddToArr(arr, userLogin) ' @(id 1)
+'         Call AddToArr(arr, userLogin) ' @dependency: 1.bas
     
 '     Next i
     
@@ -57,7 +57,7 @@ Function GetADInfo(ByVal objectClass$, ByVal searchByAttr$, ByVal searchString$,
         Dim i&, item$
         For i = 1 To objRecordSet.RecordCount
             item = objRecordSet.Fields(returnAttr)
-            Call AddToArr(arr, item) ' @(id 1)
+            Call AddToArr(arr, item) ' @dependency: 1.bas
             objRecordSet.MoveNext
         Next i
     End If

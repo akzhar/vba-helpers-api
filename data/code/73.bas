@@ -6,7 +6,7 @@ Function Rng2String(ByRef rng As Range, ByVal delimiter$, Optional ByVal fnName$
     ' If fnName is provided - concatenates only cells that passed the function
     Rng2String = ""
     If fnName = "" Then
-        Rng2String = Join(Rng2Array(rng), delimiter) ' @(id 3)
+        Rng2String = Join(Rng2Array(rng), delimiter) ' @dependency: 3.bas
     Else
         Dim cell As Range
         For Each cell In rng

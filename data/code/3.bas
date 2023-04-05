@@ -7,7 +7,7 @@ Function Rng2Array(ByRef rng As Range) As Variant()
 
     For Each cell In rng
         If cell.Value <> "" Then
-            Call AddToArr(arr, CStr(cell.Value))  ' @(id 1)
+            Call AddToArr(arr, CStr(cell.Value))  ' @dependency: 1.bas
         End If
     Next cell
 

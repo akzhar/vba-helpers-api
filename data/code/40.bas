@@ -1,15 +1,14 @@
 Attribute VB_Name = "Helper40"
 Option Explicit
 
-Const PROXY_URL$ = "xxx.proxy.su"
-Dim HttpCodes As Object
+Private HttpCodes As Object
 
-Function initHttpCodes()
+Private Function initHttpCodes()
     Set HttpCodes = CreateObject("Scripting.Dictionary")
     HttpCodes("200") = "OK"
-    HttpCodes("400") = "BAD REQUEST"
-    HttpCodes("404") = "NOT FOUND"
-    HttpCodes("500") = "SERVER ERROR"
+    HttpCodes("400") = "Bad Request"
+    HttpCodes("404") = "Not Found"
+    HttpCodes("500") = "Internal Server Error"
 End Function
 
 Function HttpQuery(ByVal url$, Optional ByVal method$ = "GET", Optional ByVal contentType$ = "text/plain", Optional ByVal reqBody$) As Variant
@@ -21,21 +20,18 @@ Function HttpQuery(ByVal url$, Optional ByVal method$ = "GET", Optional ByVal co
           
     With req
         .Open method, url, False
-        If PROXY_URL <> "" Then
-            .setProxy 2, PROXY_URL, ""
-        End If
         .setRequestHeader "Content-Type", contentType & "; charset=UTF-8"
         .send reqBody
     End With
     
     If req.Status <> "200" Then
         MsgBox "Server response is not OK." _
-        & vbLf & vbLf & "Response status: " & req.Status & HttpCodes(req.Status), vbExclamation
+        & vbLf & vbLf & req.Status & ": " & HttpCodes(Cstr(req.Status)), vbExclamation
         Exit Function
     End If
     
     If contentType = "application/json" Then
-        Set HttpQuery = JsonConverter.ParseJson(req.responseText) ' @(id 42)
+        Set HttpQuery = JsonConverter.ParseJson(req.responseText) ' @dependency: 42.bas
     Else
         HttpQuery = req.responseText
     End If

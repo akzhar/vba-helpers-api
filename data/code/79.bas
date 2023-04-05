@@ -7,7 +7,7 @@ Function ExportPictures(ByRef ws As Worksheet, ByVal pathToSave$)
     Dim shp As Shape
     Dim counter&: counter =0
 
-    Call TurnUpdatesOn(False) ' @(id 51)
+    Call TurnUpdatesOn(False) ' @dependency: 51.bas
     
     With ws
         For Each shp In .Shapes
@@ -29,7 +29,7 @@ Function ExportPictures(ByRef ws As Worksheet, ByVal pathToSave$)
         Next shp
     End With
     
-    Call TurnUpdatesOn(True) ' @(id 51)
+    Call TurnUpdatesOn(True) ' @dependency: 51.bas
 
     MsgBox counter & " pictures has been saved", vbInformation
 

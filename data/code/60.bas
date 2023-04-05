@@ -16,7 +16,7 @@ Function GetRegExpMatches(ByVal text$, ByVal pattern$) As Variant()
         If matchesColl.Count <> 0 Then
             Dim i&, matches()
             For i = 0 To matchesColl.Count - 1
-                Call AddToArr(matches, matchesColl(i)) ' @(id 1)
+                Call AddToArr(matches, matchesColl(i)) ' @dependency: 1.bas
             Next i
             GetRegExpMatches = matches
         End If

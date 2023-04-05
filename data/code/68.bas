@@ -5,7 +5,7 @@ Function GetRowByHeader(ByRef ws As Worksheet, ByVal headerValue$, ByVal headerC
   ' Searches for the text in the specified column and returns the number of the row in which it was found
 
   Dim foundRow&: foundRow = 0
-  Dim lastRow&: lastRow = GetLastRow(ws, headerCol) ' @(id 64)
+  Dim lastRow&: lastRow = GetLastRow(ws, headerCol) ' @dependency: 64.bas
   Dim i&
 
   For i = 1 To lastRow

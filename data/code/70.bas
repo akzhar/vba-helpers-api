@@ -10,7 +10,7 @@ Function GetFirstWordAfter(ByVal searchWord$, ByVal str$) As String
     wordAfter = Mid(wordAfter, InStr(1, wordAfter, " ", vbTextCompare))
     wordAfter = Trim(wordAfter)
     
-    If Includes(wordAfter, " ") Then '@(id 69)
+    If Includes(wordAfter, " ") Then ' @dependency: 69.bas
         wordAfter = Mid(wordAfter, 1, InStr(1, wordAfter, " ", vbTextCompare) - 1)
     End If
     

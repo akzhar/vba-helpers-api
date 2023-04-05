@@ -16,7 +16,7 @@ Const COLOR_RED& = 255
 Sub CompareTables()
     ' Comparison of 2 tables with the same structure (identical headers, quantity and order of columns)
 
-    Call TurnUpdatesOn(False) ' @(id 51)
+    Call TurnUpdatesOn(False) ' @dependency: 51.bas
 
     Dim ws1 As Worksheet, ws2 As Worksheet
     Dim iLastRow1&, iLastRow2&
@@ -25,11 +25,11 @@ Sub CompareTables()
     Set ws1 = ThisWorkbook.Sheets(SHEET_1_NO)
     Set ws2 = ThisWorkbook.Sheets(SHEET_2_NO)
 
-    iLastRow2 = GetLastRow(ws2, FIRST_COL) ' @(id 64)
-    iLastCol2 = GetLastColumn(ws2, FIRST_ROW - 1) ' @(id 65)
+    iLastRow2 = GetLastRow(ws2, FIRST_COL) ' @dependency: 64.bas
+    iLastCol2 = GetLastColumn(ws2, FIRST_ROW - 1) ' @dependency: 65.bas
 
-    iLastRow1 = GetLastRow(ws1, FIRST_COL) ' @(id 64)
-    iLastCol1 = GetLastColumn(ws1, FIRST_ROW - 1) ' @(id 65)
+    iLastRow1 = GetLastRow(ws1, FIRST_COL) ' @dependency: 54.bas
+    iLastCol1 = GetLastColumn(ws1, FIRST_ROW - 1) ' @dependency: 65.bas
 
     ws2.Range(ws2.Cells(FIRST_ROW, FIRST_COL), ws2.Cells(iLastRow2, FIRST_COL)).Interior.Color = COLOR_RED
 
@@ -89,14 +89,14 @@ Sub CompareTables()
 
     MsgBox "Comparison of 2 tables completed", vbInformation
 
-    Call TurnUpdatesOn(True) ' @(id 51)
+    Call TurnUpdatesOn(True) ' @dependency: 51.bas
 
 End Sub
 
 Sub ResetTables()
     ' Returns both tables to their original state
 
-    Call TurnUpdatesOn(False) ' @(id 51)
+    Call TurnUpdatesOn(False) ' @dependency: 51.bas
 
     Dim ws1 As Worksheet, ws2 As Worksheet
     Dim iLastRow1&, iLastRow2&
@@ -105,8 +105,8 @@ Sub ResetTables()
     Set ws1 = ThisWorkbook.Sheets(SHEET_1_NO)
     Set ws2 = ThisWorkbook.Sheets(SHEET_2_NO)
 
-    iLastRow2 = GetLastRow(ws2, FIRST_COL) ' @(id 64)
-    iLastCol2 = GetLastColumn(ws2, FIRST_ROW - 1) ' @(id 65)
+    iLastRow2 = GetLastRow(ws2, FIRST_COL) ' @dependency: 64.bas
+    iLastCol2 = GetLastColumn(ws2, FIRST_ROW - 1) ' @dependency: 65.bas
 
     With ws2.Range(ws2.Cells(FIRST_ROW, FIRST_COL), ws2.Cells(iLastRow2, iLastCol2))
       .Interior.Color = xlNone
@@ -114,8 +114,8 @@ Sub ResetTables()
     End with
     Application.Goto [A1], True
 
-    iLastRow1 = GetLastRow(ws1, FIRST_COL) ' @(id 64)
-    iLastCol1 = GetLastColumn(ws1, FIRST_ROW - 1) ' @(id 65)
+    iLastRow1 = GetLastRow(ws1, FIRST_COL) ' @dependency: 64.bas
+    iLastCol1 = GetLastColumn(ws1, FIRST_ROW - 1) ' @dependency: 65.bas
 
     With ws1.Range(ws1.Cells(FIRST_ROW, FIRST_COL), ws1.Cells(iLastRow1, iLastCol1))
       .Interior.Color = xlNone
@@ -123,6 +123,6 @@ Sub ResetTables()
     End With
     Application.Goto [A1], True
 
-    Call TurnUpdatesOn(True) ' @(id 51)
+    Call TurnUpdatesOn(True) ' @dependency: 51.bas
 
 End Sub

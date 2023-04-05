@@ -5,7 +5,7 @@ Function CreateWs(Optional ByVal tabName$, Optional ByVal tabColor& = -1, Option
     ' Creates a worksheet in the current workbook
 
     If tabName <> "" Then
-        Dim wsExist As Boolean: wsExist = IsWsExists(ThisWorkbook, tabName) ' @(id 13)
+        Dim wsExist As Boolean: wsExist = IsWsExists(ThisWorkbook, tabName) ' @dependency: 13.bas
         If wsExist Then
             If needRecreate Then
                 Application.DisplayAlerts = False
