@@ -1,7 +1,15 @@
 'use strict';
 
+function compareFn(a, b) {
+  if (a.name < b.name) { return -1; }
+  if (a.name > b.name) { return 1; }
+  return 0;
+}
+
 // ф-ция разбивает данные (json) по роутам
 function getRoutedData(json) {
+
+  json.sort(compareFn);
 
   let categoriesData = json.reduce((acc, item) => {
     
@@ -22,7 +30,7 @@ function getRoutedData(json) {
 
   }, {});
 
-  const categories = Object.keys(categoriesData).map((category, i) => {
+  const categories = Object.keys(categoriesData).sort().map((category, i) => {
     const { helpersCount, keywords } = categoriesData[category];
     return { id: i, category, helpersCount, keywords };
   });
