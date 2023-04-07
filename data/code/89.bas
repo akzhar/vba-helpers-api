@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper89"
+Attribute VB_Name = "VbaHelper_Filter2DArr"
 Option Explicit
 
 Function Filter2DArr(ByRef arr(), ByVal fnName$, ByVal elementPos&) As Variant()

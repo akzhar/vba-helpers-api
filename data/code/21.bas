@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper21"
+Attribute VB_Name = "VbaHelper_UnixTime2Date"
 Option Explicit
 
 Function UnixTime2Date(ByVal unixDate$) As Date

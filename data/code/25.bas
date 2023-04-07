@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper25"
+Attribute VB_Name = "VbaHelper_GetFolderPath"
 Option Explicit
 
 Function GetFolderPath(ByVal titleMessage$, Optional ByVal defaultPath$ = "") As String

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper65"
+Attribute VB_Name = "VbaHelper_GetLastColumn"
 Option Explicit
 
 Function GetLastColumn(ByRef ws As Worksheet, Optional ByVal rowNum&) As Long

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper17"
+Attribute VB_Name = "VbaHelper_GetMonthNum"
 Option Explicit
 
 Function GetMonthNum(ByVal monthName$) As Long

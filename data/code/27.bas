@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper27"
+Attribute VB_Name = "VbaHelper_ReadTxtFile"
 Option Explicit
 
 Function ReadTxtFile(ByVal filePath$, Optional ByVal encoding$ = "utf-8") As String

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper37"
+Attribute VB_Name = "VbaHelper_Rgb2Long"
 Option Explicit
 
 Function Rgb2Long(ByVal R&, ByVal G&, ByVal B&) As Long

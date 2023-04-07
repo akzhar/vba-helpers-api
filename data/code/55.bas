@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper55"
+Attribute VB_Name = "VbaHelper_TurnFiltersOn"
 Option Explicit
 
 Function TurnFiltersOn(ByRef ws As Worksheet, ByVal headerRow&)

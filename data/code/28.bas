@@ -1,7 +1,7 @@
-Attribute VB_Name = "Helper28"
+Attribute VB_Name = "VbaHelper_Save2TxtFile"
 Option Explicit
 
-Function SaveToTxtFile(ByVal text$, ByVal filePath$, ByVal fileName$, Optional ByVal encoding = "utf-8") As String
+Function Save2TxtFile(ByVal text$, ByVal filePath$, ByVal fileName$, Optional ByVal encoding = "utf-8") As String
     ' Writes content in txt file in specified encoding and save the file in specified location 
 
     Dim FO As Object: Set FO = CreateObject("ADODB.Stream")
@@ -18,6 +18,6 @@ Function SaveToTxtFile(ByVal text$, ByVal filePath$, ByVal fileName$, Optional B
 
     Set FO = Nothing
 
-    SaveToTxtFile = fullPath
+    Save2TxtFile = fullPath
     
 End Function

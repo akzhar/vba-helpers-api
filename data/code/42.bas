@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper42"
+Attribute VB_Name = "VbaHelper_JsonConverter"
 Option Explicit
 
 ' JSON Converter for VBA (c)

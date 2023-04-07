@@ -1,7 +1,7 @@
-Attribute VB_Name = "Helper69"
+Attribute VB_Name = "VbaHelper_HasSubstring"
 Option Explicit
 
-Function Includes(ByVal str$, ByVal subStr$) As Boolean
+Function HasSubstring(ByVal str$, ByVal subStr$) As Boolean
     ' Checks if string includes substring
-    Includes = CBool(InStr(1, str, subStr, vbTextCompare) <> 0)
+    HasSubstring = CBool(InStr(1, str, subStr, vbTextCompare) <> 0)
 End Function

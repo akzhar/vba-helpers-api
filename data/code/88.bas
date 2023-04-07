@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper88"
+Attribute VB_Name = "VbaHelper_IsDateBetween"
 Option Explicit
 
 Function IsDateBetween(testDate As Date, startDate As Date, endDate As Date) As Boolean

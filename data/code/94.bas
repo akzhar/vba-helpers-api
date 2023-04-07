@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper94"
+Attribute VB_Name = "VbaHelper_Tests"
 Option Explicit
 
 ' Tests for VBA (c)

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper30"
+Attribute VB_Name = "VbaHelper_AddBorders"
 Option Explicit
 
 Function AddBorders(ByRef rng As Range)

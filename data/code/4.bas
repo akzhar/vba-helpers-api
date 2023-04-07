@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper4"
+Attribute VB_Name = "VbaHelper_IsInArray"
 Option Explicit
 
 Function IsInArray(ByRef arr(), ByVal element) As Boolean

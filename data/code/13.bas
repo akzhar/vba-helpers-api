@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper13"
+Attribute VB_Name = "VbaHelper_IsWsExists"
 Option Explicit
 
 Function IsWsExists(ByRef wb As Workbook, ByVal wsName$) As Boolean

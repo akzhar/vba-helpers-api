@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper49"
+Attribute VB_Name = "VbaHelper_Round"
 Option Explicit
 
 Function Round(ByVal strNumber$, ByVal numDigits&) As String

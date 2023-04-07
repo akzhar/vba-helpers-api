@@ -1,12 +1,12 @@
-Attribute VB_Name = "Helper113"
+Attribute VB_Name = "VbaHelper_IsVBModuleExists"
 Option Explicit
 
-Function IsModuleExists(ByVal vbModuleName$, ByRef wb As Workbook) As Boolean
+Function IsVBModuleExists(ByVal vbModuleName$, ByRef wb As Workbook) As Boolean
     ' Checks if VBProject contains specified module
     
     Dim ext$, objVbComp
     
-    IsModuleExists = False
+    IsVBModuleExists = False
     
     For Each objVbComp In wb.VBProject.VBComponents
       Select Case objVbComp.Type
@@ -19,8 +19,8 @@ Function IsModuleExists(ByVal vbModuleName$, ByRef wb As Workbook) As Boolean
          Case Else
             ext = ""
       End Select
-      IsModuleExists = CBool((objVbComp.Name & ext) = vbModuleName)
-      If IsModuleExists Then Exit Function
+      IsVBModuleExists = CBool((objVbComp.Name & ext) = vbModuleName)
+      If IsVBModuleExists Then Exit Function
     Next objVbComp
     
 End Function

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper68"
+Attribute VB_Name = "VbaHelper_GetRowByHeader"
 Option Explicit
 
 Function GetRowByHeader(ByRef ws As Worksheet, ByVal headerValue$, ByVal headerCol&) As Long
@@ -15,10 +15,6 @@ Function GetRowByHeader(ByRef ws As Worksheet, ByVal headerValue$, ByVal headerC
     End If
   Next i
 
-  If foundRow = 0 Then
-    GetRowByHeader = -1
-    Exit Function
-  End If
+  GetRowByHeader = Iif(foundRow = 0, -1, foundRow)
 
-  GetRowByHeader = foundRow
 End Function

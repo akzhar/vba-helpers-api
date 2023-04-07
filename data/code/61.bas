@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper61"
+Attribute VB_Name = "VbaHelper_RegExpTest"
 Option Explicit
 
 Function RegExpTest(ByVal text$, ByVal pattern$) As Boolean

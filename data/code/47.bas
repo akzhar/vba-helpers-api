@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper47"
+Attribute VB_Name = "VbaHelper_CreateEvent"
 Option Explicit
 
 Function CreateEvent(ByVal subject$, ByVal body$, ByVal startDate As Date, Optional ByVal recurrenceType$ = "")
@@ -38,7 +38,6 @@ Function CreateEvent(ByVal subject$, ByVal body$, ByVal startDate As Date, Optio
     newEventItem.Start = startDate
     newEventItem.AllDayEvent = True
     
-    ' периодический повтор задачи
     If recurrenceType <> "" Then
                 
         Dim recurrencePattern As Object: Set recurrencePattern = newAppointmentItem.GetRecurrencePattern

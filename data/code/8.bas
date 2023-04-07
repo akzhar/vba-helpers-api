@@ -1,7 +1,7 @@
-Attribute VB_Name = "Helper8"
+Attribute VB_Name = "VbaHelper_SortArr"
 Option Explicit
 
-Function SortArr(ByRef arr(), Optional ByVal isDesc As Boolean = True) As Variant()
+Function SortArr(ByRef arr(), Optional ByVal isDesc As Boolean = False) As Variant()
     ' Sorts 1-dim array
     Dim i&, j&, condition As Boolean, temp
     

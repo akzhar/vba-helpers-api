@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper19"
+Attribute VB_Name = "VbaHelper_GetWeekNum"
 Option Explicit
 
 Function GetWeekNum(ByVal d As Date) As Long

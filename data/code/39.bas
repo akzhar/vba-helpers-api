@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper39"
+Attribute VB_Name = "VbaHelper_GetSelectedRadioBtn"
 Option Explicit
 
 Function GetSelectedRadioBtn(ByVal frameName$) As MSforms.OptionButton

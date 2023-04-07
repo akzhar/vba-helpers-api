@@ -1,22 +1,23 @@
-Attribute VB_Name = "Helper45"
+Attribute VB_Name = "VbaHelper_GetCurrentUserEmail"
 Option Explicit
 
 Function GetCurrentUserEmail() As String
     ' Gets current user's email from Outlook
     
-    Dim objOutlook As Object
+    Dim outlookObj As Object
     
     On Error Resume Next
-    Set objOutlook = GetObject(, "Outlook.Application")
+    Set outlookObj = GetObject(, "Outlook.Application")
     On Error GoTo 0
     
-    Dim objNameSpace As Object
+    Dim namespaceObj As Object
     
-    If objOutlook Is Nothing Then
-        Set objOutlook = CreateObject("Outlook.Application")
-        Set objNameSpace = objOutlook.GetNamespace("MAPI")
+    If outlookObj Is Nothing Then
+        Set outlookObj = CreateObject("Outlook.Application")
+        Set namespaceObj = outlookObj.GetNamespace("MAPI")
     End If
-        
-    GetCurrentUserEmail = objOutlook.Session.accounts.Item(1)
+
+    Set outlookObj = Nothing: Set namespaceObj = Nothing
+    GetCurrentUserEmail = outlookObj.Session.accounts.Item(1)
     
 End Function

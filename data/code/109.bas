@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper109"
+Attribute VB_Name = "VbaHelper_OpenUrl"
 Option Explicit
 
 Private Declare Function ShellExecute _
@@ -11,6 +11,6 @@ Private Declare Function ShellExecute _
     Optional ByVal WindowStyle As Long = vbMinimizedFocus _
   ) As Long
 
-Sub OpenUrl(ByVal url$)
+Function OpenUrl(ByVal url$)
     Call ShellExecute(0, "Open", url)
-End Sub
+End Function

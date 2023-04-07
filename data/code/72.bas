@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper72"
+Attribute VB_Name = "VbaHelper_SliceString"
 Option Explicit
 
 Function SliceString(ByVal textString$, ByVal beginIndex&, Optional ByVal endIndex&) As String

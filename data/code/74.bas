@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper74"
+Attribute VB_Name = "VbaHelper_RegExpReplace"
 Option Explicit
 
 Function RegExpReplace(ByVal text$, ByVal replacePattern$, ByVal replaceValue$) As String

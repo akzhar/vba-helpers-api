@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper20"
+Attribute VB_Name = "VbaHelper_GetDateByDayNum"
 Option Explicit
 
 Function GetDateByDayNum(ByVal dayNum&, ByVal yearNum&, Optional ByVal dateFormat$ = "dd.mm.yyyy") As String

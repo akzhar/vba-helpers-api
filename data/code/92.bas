@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper92"
+Attribute VB_Name = "VbaHelper_CreateWs"
 Option Explicit
 
 Function CreateWs(Optional ByVal tabName$, Optional ByVal tabColor& = -1, Optional ByRef afterWs As Worksheet, Optional ByVal needRecreate As Boolean = False) As Worksheet

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper12"
+Attribute VB_Name = "VbaHelper_IsWbOpen"
 Option Explicit
 
 Function IsWbOpen(ByVal wbName$) As Boolean

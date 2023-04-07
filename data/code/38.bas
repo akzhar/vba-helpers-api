@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper38"
+Attribute VB_Name = "VbaHelper_Hex2Long"
 Option Explicit
 
 Function Hex2Long(ByVal hexColor$) As Long

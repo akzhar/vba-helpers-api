@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper1"
+Attribute VB_Name = "VbaHelper_AddToArr"
 Option Explicit
 
 Function AddToArr(ByRef arr(), ByVal element)

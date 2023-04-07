@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper67"
+Attribute VB_Name = "VbaHelper_GetColumnByHeader"
 Option Explicit
 
 Function GetColumnByHeader(ByRef ws As Worksheet, ByVal headerValue$, ByVal headerRow&) As Long
@@ -15,10 +15,6 @@ Function GetColumnByHeader(ByRef ws As Worksheet, ByVal headerValue$, ByVal head
     End If
   Next i
 
-  If foundCol = 0 Then
-    GetColumnByHeader = -1
-    Exit Function
-  End If
+  GetColumnByHeader = Iif(foundCol = 0, -1, foundCol)
 
-  GetColumnByHeader = foundCol
 End Function

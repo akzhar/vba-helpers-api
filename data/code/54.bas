@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper54"
+Attribute VB_Name = "VbaHelper_ClearFilters"
 Option Explicit
 
 Function ClearFilters(ByRef ws As Worksheet)

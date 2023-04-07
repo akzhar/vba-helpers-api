@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper64"
+Attribute VB_Name = "VbaHelper_GetLastRow"
 Option Explicit
 
 Function GetLastRow(ByRef ws As Worksheet, Optional ByVal colNum&) As Long

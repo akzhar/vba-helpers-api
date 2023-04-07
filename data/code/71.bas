@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper71"
+Attribute VB_Name = "VbaHelper_SplitToChars"
 Option Explicit
 
 Function SplitToChars(ByVal str$) As String()

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper63"
+Attribute VB_Name = "VbaHelper_GetColumnName"
 Option Explicit
 
 Function GetColumnName(ByVal colNum&) As String

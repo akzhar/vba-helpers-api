@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper24"
+Attribute VB_Name = "VbaHelper_ExportVBProject"
 Option Explicit
 
 Function ExportVBProject()

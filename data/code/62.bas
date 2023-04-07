@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper62"
+Attribute VB_Name = "VbaHelper_GetFirstRegExpMatch"
 Option Explicit
 
 Function GetFirstRegExpMatch(ByVal text$, ByVal pattern$) As String

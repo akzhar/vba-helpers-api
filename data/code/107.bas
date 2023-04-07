@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper107"
+Attribute VB_Name = "VbaHelper_GetSelectedRows"
 Option Explicit
 
 Function GetSelectedRows() As Variant()

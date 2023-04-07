@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper78"
+Attribute VB_Name = "VbaHelper_ValidateInput"
 Option Explicit
 
 Function ValidateInput(ByVal textRequest$, ByVal checkPattern$, ByVal textPattern$, Optional ByVal textWarning$, Optional ByVal defaultInput$) As String

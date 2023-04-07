@@ -1,17 +1,17 @@
-Attribute VB_Name = "Helper80"
+Attribute VB_Name = "VbaHelper_CompareTables"
 Option Explicit
 
 ' Worksheets number
-Const SHEET_1_NO& = 1
-Const SHEET_2_NO& = 2
+Private Const SHEET_1_NO& = 1
+Private Const SHEET_2_NO& = 2
 
 ' Left top cornerof the table on both worksheets
-Const FIRST_ROW& = 2
-Const FIRST_COL& = 1
+Private Const FIRST_ROW& = 2
+Private Const FIRST_COL& = 1
 
 ' Colors
-Const COLOR_GREEN& = 5296274
-Const COLOR_RED& = 255
+Private Const COLOR_GREEN& = 5296274
+Private Const COLOR_RED& = 255
 
 Sub CompareTables()
     ' Comparison of 2 tables with the same structure (identical headers, quantity and order of columns)

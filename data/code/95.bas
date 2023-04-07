@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper95"
+Attribute VB_Name = "VbaHelper_Logger"
 Option Explicit
 
 ' Logging helpers for VBA (c)

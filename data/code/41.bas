@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper41"
+Attribute VB_Name = "VbaHelper_ShowInterface"
 Option Explicit
 
 Function ShowInterface(ByVal flag As Boolean)

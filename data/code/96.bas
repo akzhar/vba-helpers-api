@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper96"
+Attribute VB_Name = "VbaHelper_GetHtmlTable"
 Option Explicit
 
 ' Visual Basic script that returns table data from a website to excel sheet (c)

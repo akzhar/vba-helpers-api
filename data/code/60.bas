@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper60"
+Attribute VB_Name = "VbaHelper_GetRegExpMatches"
 Option Explicit
 
 Function GetRegExpMatches(ByVal text$, ByVal pattern$) As Variant()

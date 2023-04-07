@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper86"
+Attribute VB_Name = "VbaHelper_CopyVBProject"
 Option Explicit
 
 Function CopyVBProject(ByRef srcWb As Workbook, ByRef wb As Workbook)

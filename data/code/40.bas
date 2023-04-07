@@ -1,9 +1,9 @@
-Attribute VB_Name = "Helper40"
+Attribute VB_Name = "VbaHelper_SendHttpQuery"
 Option Explicit
 
 Private HttpCodes As Object
 
-Private Function initHttpCodes()
+Private Function InitHttpCodes()
     Set HttpCodes = CreateObject("Scripting.Dictionary")
     HttpCodes("200") = "OK"
     HttpCodes("400") = "Bad Request"
@@ -11,10 +11,10 @@ Private Function initHttpCodes()
     HttpCodes("500") = "Internal Server Error"
 End Function
 
-Function HttpQuery(ByVal url$, Optional ByVal method$ = "GET", Optional ByVal contentType$ = "text/plain", Optional ByVal reqBody$) As Variant
+Function SendHttpQuery(ByVal url$, Optional ByVal method$ = "GET", Optional ByVal contentType$ = "text/plain", Optional ByVal reqBody$) As Variant
     ' Executes HTTP query
 
-    Call initHttpCodes
+    Call InitHttpCodes
     
     Dim req As Object: Set req = CreateObject("WinHttp.WinHttpRequest.5.1")
           

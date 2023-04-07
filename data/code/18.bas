@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper18"
+Attribute VB_Name = "VbaHelper_GetWeekday"
 Option Explicit
 
 Function GetWeekday(ByVal d As Date) As String

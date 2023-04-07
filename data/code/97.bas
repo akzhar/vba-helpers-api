@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper97"
+Attribute VB_Name = "VbaHelper_ClearDebugConsole"
 Option Explicit
 
 Function ClearDebugConsole()

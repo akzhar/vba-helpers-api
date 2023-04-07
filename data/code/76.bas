@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper76"
+Attribute VB_Name = "VbaHelper_CONCATIF"
 Option Explicit
 
 Function CONCATIF(ByRef rngToCheck As Range, ByRef rngToConcat As Range, ByVal pattern$, Optional separator$ = " ") As String

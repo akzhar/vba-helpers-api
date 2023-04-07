@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper31"
+Attribute VB_Name = "VbaHelper_IsColored"
 Option Explicit
 
 Function IsColored(ByRef rng As Range) As Boolean

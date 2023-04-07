@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper114"
+Attribute VB_Name = "VbaHelper_DownloadFile"
 Option Explicit
 
 Function DownloadFile(ByVal url$) As String
@@ -26,5 +26,7 @@ Function DownloadFile(ByVal url$) As String
         Debug.Print (WinHttpReq.Status & ": " & WinHttpReq.statusText)
         DownloadFile = ""
     End If
+
+    Set WinHttpReq = Nothing
 
 End Function

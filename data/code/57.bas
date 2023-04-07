@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper57"
+Attribute VB_Name = "VbaHelper_CopyRowFormulas"
 Option Explicit
 
 Function CopyRowFormulas(ByRef ws As Worksheet, ByVal fromCol&, ByVal toCol&, ByVal fromRow&, ByVal targerRowFrom&, ByVal targerRowTo&)

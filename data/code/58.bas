@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper58"
+Attribute VB_Name = "VbaHelper_RefreshPQ"
 Option Explicit
 
 Function RefreshPQ(ByVal queryName$)
@@ -12,22 +12,21 @@ Function RefreshPQ(ByVal queryName$)
                 .BackgroundQuery = True
                 .Refresh
                 ' waiting when Power Query refresh is complete
-                Call WaitRefreshComplete
+                Call WaitTillRefreshComplete
             End With
         End If
-    Next
+    Next con
 End Function
 
-Private Sub WaitRefreshComplete()
+Private Sub WaitTillRefreshComplete()
 
-    Dim t: t = TimeValue("00:00:01")
     Dim ws As Worksheet: Set ws = ThisWorkbook.Sheets(1)
 
-    Dim b1 As Boolean: b1 = ws.Range("Query1 Name").ListObject.QueryTable.Refreshing
-    Dim b2 As Boolean: b2 = ws.Range("Query2 Name").ListObject.QueryTable.Refreshing
+    Dim b1 As Boolean: b1 = ws.Range("Query_1_Range_Name").ListObject.QueryTable.Refreshing
+    Dim b2 As Boolean: b2 = ws.Range("Query_2_Range_Name").ListObject.QueryTable.Refreshing
 
     If b1 Or b2 Then
-        Call Application.OnTime(Now + t, "WaitRefreshComplete")
+        Call Application.OnTime(Now + TimeValue("00:00:01"), "WaitTillRefreshComplete")
     Else
         Call Application.Run("DoAfterRefreshComplete")
     End If
@@ -36,6 +35,6 @@ End Sub
 
 Private Sub DoAfterRefreshComplete()
     
-    MsgBox "Query has been refreshed"
+    MsgBox "Query has been refreshed", vbInformation
 
 End Sub

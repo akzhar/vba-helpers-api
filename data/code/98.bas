@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper98"
+Attribute VB_Name = "VbaHelper_GetRegExpSubMatches"
 Option Explicit
 
 Function GetRegExpSubMatches(ByVal text$, ByVal pattern$, Optional ByVal keepFirstSub As Boolean = True) As Variant()
@@ -6,13 +6,13 @@ Function GetRegExpSubMatches(ByVal text$, ByVal pattern$, Optional ByVal keepFir
 
     GetRegExpSubMatches = Array()
 
-    Dim regExp As Object: Set regExp = CreateObject("VBScript.RegExp")
-    regExp.pattern = pattern
-    regExp.Global = True
-    regExp.MultiLine = True
+    Dim RegExp As Object: Set RegExp = CreateObject("VBScript.RegExp")
+    RegExp.pattern = pattern
+    RegExp.Global = True
+    RegExp.MultiLine = True
     
-    If regExp.test(text) Then
-        Dim matchesColl As Object: Set matchesColl = regExp.Execute(text)
+    If RegExp.test(text) Then
+        Dim matchesColl As Object: Set matchesColl = RegExp.Execute(text)
         If matchesColl.Count <> 0 Then
             Dim i&, allMatches()
             For i = 0 To matchesColl.Count - 1

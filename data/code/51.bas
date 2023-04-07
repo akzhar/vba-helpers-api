@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper51"
+Attribute VB_Name = "VbaHelper_TurnUpdatesOn"
 Option Explicit
 
 Function TurnUpdatesOn(ByVal flag As Boolean)

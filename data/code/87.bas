@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper87"
+Attribute VB_Name = "VbaHelper_BreakLinks"
 Option Explicit
 
 Function BreakLinks(wb As Workbook)

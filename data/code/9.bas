@@ -1,7 +1,7 @@
-Attribute VB_Name = "Helper9"
+Attribute VB_Name = "VbaHelper_Sort2DArr"
 Option Explicit
 
-Function Sort2DArr(ByRef arr(), ByVal N&, Optional ByVal isDesc As Boolean = True) As Variant()
+Function Sort2DArr(ByRef arr(), ByVal N&, Optional ByVal isDesc As Boolean = False) As Variant()
     ' Sorts 2-dim array by specified column N
 
     If N > UBound(arr, 1) Or N < LBound(arr, 1) Then

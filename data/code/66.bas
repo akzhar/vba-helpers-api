@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper66"
+Attribute VB_Name = "VbaHelper_GetEdgeRows"
 Option Explicit
 
 Function GetEdgeRows(ByRef rng As Range) As Long()

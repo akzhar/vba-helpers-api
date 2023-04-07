@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper99"
+Attribute VB_Name = "VbaHelper_GetTimeStamp"
 Option Explicit
 
 Private Type SystemTime
@@ -16,7 +16,6 @@ Private Declare Sub GetLocalTime Lib "kernel32" (lpSystem As SystemTime)
 
 Function GetTimeStamp() As String
     ' Gets current timestamp (yyyy-mm-dd hh:mm:ss:mss)
-
     Dim d As Date: d = Now()
     Dim t As SystemTime
     GetLocalTime t

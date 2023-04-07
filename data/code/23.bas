@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper23"
+Attribute VB_Name = "VbaHelper_GetFilePaths"
 Option Explicit
 
 Function GetFilePaths(ByVal titleMessage$, Optional ByVal extensionFilters$ = "", Optional ByVal defaultPath$ = "", Optional ByVal allowMulti As Boolean = False) As String()

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper29"
+Attribute VB_Name = "VbaHelper_GetFileName"
 Option Explicit
 
 Function GetFileName(ByVal filePath$) As String

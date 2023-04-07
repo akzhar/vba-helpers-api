@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper59"
+Attribute VB_Name = "VbaHelper_ProtectWs"
 Option Explicit
 
 Function ProtectWs(ByVal flag As Boolean, ByRef ws As Worksheet, ByVal password$)

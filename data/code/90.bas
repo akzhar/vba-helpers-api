@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper90"
+Attribute VB_Name = "VbaHelper_SplitToChunks"
 Option Explicit
 
 Function SplitToChunks(ByVal text$, ByVal numOfChars&) As String()

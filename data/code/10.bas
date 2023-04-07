@@ -1,20 +1,18 @@
-Attribute VB_Name = "Helper10"
+Attribute VB_Name = "VbaHelper_GetUniqueArr"
 Option Explicit
 
 Function GetUniqueArr(ByRef arr()) As Variant()
     ' Get 1-dim array without duplicate values
     
-    Dim uniqueArr(): ReDim uniqueArr(0)
-    Dim isDuplicate As Boolean, arrIndex&, newArrIndex&: newArrIndex = 0
+    Dim uniqueArr(), isDuplicate As Boolean
     
-    For arrIndex = LBound(arr) To UBound(arr)
-        isDuplicate = IsInArray(uniqueArr, arr(arrIndex)) ' @dependency: 4.bas
+    Dim i&
+    For i = LBound(arr) To UBound(arr)
+        isDuplicate = IsInArray(uniqueArr, arr(i)) ' @dependency: 4.bas
         If Not isDuplicate Then
-            ReDim Preserve uniqueArr(newArrIndex)
-            uniqueArr(newArrIndex) = arr(arrIndex)
-            newArrIndex = newArrIndex + 1
+            Call AddToArr(uniqueArr, arr(i))  ' @dependency: 1.bas
         End If
-    Next arrIndex
+    Next i
 
     GetUniqueArr = uniqueArr
 End Function

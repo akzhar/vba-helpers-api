@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper79"
+Attribute VB_Name = "VbaHelper_ExportPictures"
 Option Explicit
 
 Function ExportPictures(ByRef ws As Worksheet, ByVal pathToSave$)

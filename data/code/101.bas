@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper101"
+Attribute VB_Name = "VbaHelper_ConfigSheet"
 Option Explicit
 
 ' ConfigSheet (c)

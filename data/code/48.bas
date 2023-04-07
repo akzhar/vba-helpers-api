@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper48"
+Attribute VB_Name = "VbaHelper_FixNumbers"
 Option Explicit
 
 Function FixNumbers(ByRef rng As Range)

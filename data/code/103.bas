@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper103"
+Attribute VB_Name = "VbaHelper_GetADInfo"
 Option Explicit
 
 ' Function GetAdGroupMembers(ByVal groupName$) As String
@@ -24,7 +24,7 @@ Option Explicit
 
 ' End Function
 
-Const LDAP_DOMAIN$ = "LDAP://dc=sub, dc=example, dc=com"
+Private Const LDAP_DOMAIN$ = "LDAP://dc=sub, dc=example, dc=com"
 
 Function GetADInfo(ByVal objectClass$, ByVal searchByAttr$, ByVal searchString$, ByVal returnAttr$) As Variant()
     ' Gets Active Directory attribute value (array of matches)

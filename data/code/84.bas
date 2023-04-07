@@ -1,7 +1,7 @@
-Attribute VB_Name = "Helper84"
+Attribute VB_Name = "VbaHelper_InsertData2XmlTemplate"
 Option Explicit
 
-Const STUB_DELIMITER$ = "%"
+Private Const STUB_DELIMITER$ = "%"
 
 Private Function GetIfStartRow(ByVal datakey$) As String
     GetIfStartRow = "<!-- IF HAS " & STUB_DELIMITER & datakey & STUB_DELIMITER & " -->"

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper77"
+Attribute VB_Name = "VbaHelper_GETWORKDAYS"
 Option Explicit
 
 Function GETWORKDAYS(ByVal startDate As Date, ByVal endDate As Date) As Long

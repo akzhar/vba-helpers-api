@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper105"
+Attribute VB_Name = "VbaHelper_ToggleExpandCollapse"
 Option Explicit
 
 Sub ToggleExpandCollapse()

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper15"
+Attribute VB_Name = "VbaHelper_GetDateSeparator"
 Option Explicit
 
 Function GetDateSeparator()

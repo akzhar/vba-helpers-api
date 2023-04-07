@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper115"
+Attribute VB_Name = "VbaHelper_GetFileExtension"
 Option Explicit
 
 Function GetFileExtension(ByVal filePath$) As String

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper53"
+Attribute VB_Name = "VbaHelper_HasValidation"
 Option Explicit
 
 Function HasValidation(ByRef rng As Range) As Boolean

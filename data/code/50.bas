@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper50"
+Attribute VB_Name = "VbaHelper_GetMax"
 Option Explicit
 
 Function GetMax(ByVal x As Variant, ByVal y As Variant) As Variant

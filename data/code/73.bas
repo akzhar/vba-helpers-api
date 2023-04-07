@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper73"
+Attribute VB_Name = "VbaHelper_Rng2String"
 Option Explicit
 
 Function Rng2String(ByRef rng As Range, ByVal delimiter$, Optional ByVal fnName$) As String

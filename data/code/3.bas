@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper3"
+Attribute VB_Name = "VbaHelper_Rng2Array"
 Option Explicit
 
 Function Rng2Array(ByRef rng As Range) As Variant()

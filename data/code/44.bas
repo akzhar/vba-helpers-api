@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper44"
+Attribute VB_Name = "VbaHelper_LogInfo"
 Option Explicit
 
 Function LogInfo(ByVal logMessage$)
@@ -6,7 +6,6 @@ Function LogInfo(ByVal logMessage$)
     
     Const LOG_FILE_NAME$ = "Log.txt"
 
-    Dim timeStamp$: timeStamp = CStr(Format(Now, "dd.mm.yyyy hh:mm:ss"))
     Dim logFilePath$: logFilePath = ThisWorkbook.Path & Application.PathSeparator & LOG_FILE_NAME
     Dim logFileNum As Integer: logFileNum = FreeFile
     
@@ -14,7 +13,7 @@ Function LogInfo(ByVal logMessage$)
     Open logFilePath For Append As logFileNum
     
     ' write new line in the end
-    Print #logFileNum, timeStamp & " - " & logMessage
+    Print #logFileNum, GetTimeStamp() & " - " & logMessage ' @dependency: 99.bas
     
     ' close log file
     Close logFileNum

@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper46"
+Attribute VB_Name = "VbaHelper_CreateEmail"
 Option Explicit
 
 Sub CreateEmail( _
@@ -30,19 +30,18 @@ Sub CreateEmail( _
             importanceType = 0
     End Select
         
-    Dim Outlook As Object: Set Outlook = CreateObject("Outlook.Application")
-    Dim Mail As Object: Set Mail = Outlook.CreateItem(OUTLOOK_ITEM_TYPE)
-    Dim Inspector As Object: Set Inspector = Mail.GetInspector
+    Dim outlookObj As Object: Set outlookObj = CreateObject("Outlook.Application")
+    Dim mailObj As Object: Set mailObj = outlookObj.CreateItem(OUTLOOK_ITEM_TYPE)
         
     Dim messageEnding$
         
-    With Mail
+    With mailObj
 
         If Not IsNull(copyTo) And copyTo <> "" Then .CC = copyTo
         If Not IsNull(hidenCopyTo) And hidenCopyTo <> "" Then .Bcc = hidenCopyTo
         If Not IsNull(replyTo) And replyTo <> "" Then
             .ReplyRecipients.Add replyTo
-            .ReplyRecipients.Add Utils.GetCurrentUserEmail() '(@id 45)
+            .ReplyRecipients.Add GetCurrentUserEmail() '(@id 45)
             If Not IsNull(copyTo) And copyTo <> "" Then .ReplyRecipients.Add copyTo
         End If
         .To = sendTo
@@ -75,7 +74,7 @@ Sub CreateEmail( _
     
     End With
         
-    Set Mail = Nothing: Set Outlook = Nothing
+    Set mailObj = Nothing: Set outlookObj = Nothing
 
     'Debug.Print "Email has been " & messageEnding
 

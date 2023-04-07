@@ -1,4 +1,4 @@
-Attribute VB_Name = "Helper43"
+Attribute VB_Name = "VbaHelper_ShowProcessing"
 Option Explicit
 
 Function ShowProcessing(ByVal flag As Boolean)
