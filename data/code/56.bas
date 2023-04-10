@@ -1,7 +1,7 @@
 Attribute VB_Name = "VbaHelper_SetDropDownList"
 Option Explicit
 
-Function SetDropDownList(ByRef rng As Range, ByVal source$)
+Function SetDropdown(ByRef rng As Range, ByVal source$)
     ' Sets dropdown list in the specified range
 
     Select Case True

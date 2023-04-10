@@ -1,10 +1,7 @@
-Attribute VB_Name = "VbaHelper_VerifyPassword"
+Attribute VB_Name = "VbaHelper_GetFileExtension"
 Option Explicit
 
-Private Const CORRECT_PASSWORD$ = "qwerty"
-
-Function VerifyPassword() As Boolean
-    ' Prompts you to enter a password and checks its correctness
-    Dim pass$: pass = InputBox("To continue run the macros please enter the password:", "Need password")
-    VerifyPassword = IIf(pass = CORRECT_PASSWORD, True, False)
+Function GetFileExtension(ByVal filePath$) As String
+    ' Extracts the extension from the file path
+    GetFileExtension = Right(filePath, Len(filePath) - InStr(1, filePath, ".") + 1)
 End Function
