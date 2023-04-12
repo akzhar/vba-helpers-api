@@ -1,11 +1,11 @@
 {
   "name": "vba-helpers-api",
   "version": "1.0.0",
-  "description": "Simple json API for vba-helpers",
+  "description": "JSON API for vbahelpers.ru",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "PORT=3001 node index.js",
+    "start": "NODE_ENV=production PORT=3001 node index.js",
+    "start:dev": "cross-env NODE_ENV=development node index.js",
     "service:enable": "systemctl enable vba-helpers-api",
     "service:start": "systemctl start vba-helpers-api",
     "service:stop": "systemctl stop vba-helpers-api",
@@ -16,5 +16,8 @@
   "author": "akzhar.taov@yandex.ru",
   "dependencies": {
     "json-server": "0.17.0"
+  },
+  "devDependencies": {
+    "cross-env": "7.0.3"
   }
 }
