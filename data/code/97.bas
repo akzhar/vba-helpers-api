@@ -3,8 +3,8 @@ Option Explicit
 
 Function ClearDebugConsole()
     ' Clears VBE Immediate Window
-    Dim i&
-    For i = 0 To 100
-        Debug.Print ""
-    Next i
+    Application.VBE.Windows("Immediate").SetFocus
+    If Application.VBE.ActiveWindow.Caption = "Immediate" And Application.VBE.ActiveWindow.Visible Then
+        Application.SendKeys "^g ^a {DEL}"
+    End If
 End Function
