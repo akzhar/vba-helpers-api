@@ -41,7 +41,7 @@ Sub CreateEmail( _
         If Not IsNull(hidenCopyTo) And hidenCopyTo <> "" Then .Bcc = hidenCopyTo
         If Not IsNull(replyTo) And replyTo <> "" Then
             .ReplyRecipients.Add replyTo
-            .ReplyRecipients.Add GetCurrentUserEmail() '(@id 45)
+            .ReplyRecipients.Add GetCurrentUserEmail() ' @dependency: 45.bas
             If Not IsNull(copyTo) And copyTo <> "" Then .ReplyRecipients.Add copyTo
         End If
         .To = sendTo
