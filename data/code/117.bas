@@ -1,7 +1,7 @@
-Attribute VB_Name = "VbaHelper_CountSubstringInString"
+Attribute VB_Name = "VbaHelper_CountString"
 Option Explicit
 
-Function CountSubstringInString(ByVal str$, ByVal subStr$) As Long
+Function CountString(ByVal text$, ByVal str$) As Long
     ' Counts how many times a string contains a sub string 
-    CountSubstringInString = Len(str) - Len(Replace(str, subStr, ""))
+    CountString = (Len(text) - Len(Replace(text, str, ""))) / Len(str)
 End Function

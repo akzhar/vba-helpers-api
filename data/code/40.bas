@@ -31,9 +31,9 @@ Function SendHttpQuery(ByVal url$, Optional ByVal method$ = "GET", Optional ByVa
     End If
     
     If contentType = "application/json" Then
-        Set HttpQuery = JsonConverter.ParseJson(req.responseText) ' @dependency: 42.bas
+        Set SendHttpQuery = ParseJson(req.responseText) ' @dependency: 42.bas
     Else
-        HttpQuery = req.responseText
+        SendHttpQuery = req.responseText
     End If
             
 End Function
