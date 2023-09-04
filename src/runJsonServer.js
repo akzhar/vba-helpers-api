@@ -2,31 +2,38 @@
 
 const os = require('os');
 const jsonServer = require('json-server');
+const http = require('http');
 const https = require('https');
 const fs = require('fs');
 
-const PORT = process.env.PORT || 443;
 const isProduction = Boolean(process.env.NODE_ENV == 'production');
+const HOST = isProduction ? os.hostname : 'localhost';
+const PORT = isProduction ? (process.env.PORT || 443) : 3001;
 
-const sslKeyPath = isProduction ? '../../etc/ssl/private.key' : './ssl/private.key';
-const sslCertPath = isProduction ? '../../etc/ssl/fullchain.crt' : './ssl/fullchain.crt';
+function getSslOptions() {
+  if (!isProduction) return {};
 
-const sslOptions = {
-  key: fs.readFileSync(sslKeyPath),
-  cert: fs.readFileSync(sslCertPath)
-};
+  return {
+    key: fs.readFileSync('../../etc/ssl/private.key'),
+    cert: fs.readFileSync('../../etc/ssl/fullchain.crt')
+  };
+}
 
 function runJsonServer(routes, routedData) {
   const app = jsonServer.create();
   const router = jsonServer.router(routedData);
-  const middlewares = jsonServer.defaults({ readOnly: true, host: os.hostname });
+  const middlewares = jsonServer.defaults({ readOnly: true, host: HOST });
   
   app.use(middlewares);
   app.use(jsonServer.rewriter(routes));
   app.use(router);
 
-  const server = https.createServer(sslOptions, app);
-  server.listen(PORT, () => console.log(`JSON server is running at https://${isProduction ? os.hostname : 'localhost'}:${PORT}`));
+  const server = isProduction ? https.createServer(getSslOptions(), app) : http.createServer(app);
+
+  server.listen(
+    PORT,
+    () => console.log(`JSON server is running at http${isProduction ? 's': ''}://${HOST}:${PORT}`)
+  );
 }
 
 module.exports = runJsonServer;
