@@ -15,7 +15,7 @@
   "keywords": [],
   "author": "akzhar.taov@yandex.ru",
   "dependencies": {
-    "json-server": "0.17.0"
+    "json-server": "0.17.3"
   },
   "devDependencies": {
     "cross-env": "7.0.3"
