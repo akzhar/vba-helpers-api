@@ -5,7 +5,7 @@ Function Rng2Array(ByRef rng As Range) As Variant()
     ' Converts range to array
     Dim cell As Range, arr()
 
-    For Each cell In rng
+    For Each cell In rng.Cells
         If cell.Value <> "" Then
             Call AddToArr(arr, CStr(cell.Value))  ' @dependency: 1.bas
         End If

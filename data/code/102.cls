@@ -78,7 +78,11 @@ Public Sub Push(ByVal element As Variant, Optional ByRef optArr As Variant)
         ReDim Preserve arr(UBound(arr) + 1)
     End If
     
-    arr(UBound(arr)) = element
+    If TypeName(element) = "Dictionary" Then
+        Set arr(UBound(arr)) = element
+    Else
+        arr(UBound(arr)) = element
+    End If
     
     If IsMissing(optArr) Then
         internalArr = arr
