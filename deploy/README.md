@@ -18,9 +18,9 @@ hosting --> VPS --> Home --> IP address
 
 ## Copy files to the remote VPS server
 Connect VPS with SFTP using [FileZilla](https://filezilla-project.org)
-- Host: `sftps://host_ip_address`
+- Host: `sftp://host_ip_address`
 - User: `root`
-- Password: see email
+- Password: see email `Создан сервер Amethyst Neon`
 - Port: leave empty
 
 Copy project files in the directory `./home/my_app_directory`
