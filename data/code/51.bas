@@ -8,4 +8,5 @@ Function TurnUpdatesOn(ByVal flag As Boolean)
     Application.EnableEvents = flag
     Application.DisplayStatusBar = flag
     Application.DisplayAlerts = flag
+    Application.AskToUpdateLinks = flag
 End Function 

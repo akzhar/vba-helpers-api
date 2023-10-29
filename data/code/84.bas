@@ -195,7 +195,7 @@ Private Function GetSubStubsArr(ByVal template$, ByRef dataMap As Scripting.Dict
     ' Returns array of stubs from the template
     Dim stubsArr(), datakey
     For Each datakey In dataMap.Keys()
-        Dim stub$: stub = GetFirstRegExpMatch(template, STUB_DELIMITER & "\??" & datakey & STUB_DELIMITER) ' @dependency: 62.bas
+        Dim stub$: stub = GetRegExpFirstMatch(template, STUB_DELIMITER & "\??" & datakey & STUB_DELIMITER) ' @dependency: 62.bas
         Call AddToArr(stubsArr, stub) ' @dependency: 1.bas
     Next datakey
     GetSubStubsArr = stubsArr

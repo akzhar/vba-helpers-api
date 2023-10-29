@@ -1,9 +1,13 @@
-Attribute VB_Name = "VbaHelper_ExpandCollapseRowCol"
+Attribute VB_Name = "VbaHelper_ReadClosedExcelFile"
 Option Explicit
 
-Function ExpandCollapseRowCol(ByRef ws As Worksheet, Optional ByVal flag = False)
-    ' Expand / collapse rows and columns on the sheet
-    ws.Outline.ShowLevels _
-        Rowlevels:=IIf(flag, 8, 1), _
-        ColumnLevels:=IIf(flag, 8, 1)
+Function ReadClosedExcelFile(ByVal wbPath$, ByVal wbName$, ByVal wsName$, ByVal cellAddress$) As Variant
+    ' Reads single cell value from Excel file without openning it
+    
+    If Right(wbPath, 1) <> "\" Then
+        wbPath = wbPath & "\"
+    End If
+    
+    ReadClosedExcelFile = CStr(ExecuteExcel4Macro("'" & wbPath & "[" & wbName & "]" & wsName & "'!" & Range(cellAddress).Address(ReferenceStyle:=xlR1C1)))
+
 End Function
