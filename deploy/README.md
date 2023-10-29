@@ -52,9 +52,13 @@ hosting --> VPS --> Select my server --> Open console
 
 ## Set up apache web server
 ### SSL sertifiates
-Folder `/etc/ssl`
+Using Let’s Encrypt
+https://letsencrypt.org/getting-started
+https://certbot.eff.org/instructions?ws=apache&os=ubuntufocal
 
-File `fullchain.crt` - сертификат +  промежуточный сертификат + корневой сертификат
+Certificate +  промежуточный сертификат + корневой сертификат
+`/etc/ssl/fullchain.crt` - old
+`/etc/letsencrypt/live/vbahelpers.ru/fullchain.pem`
 ```
   -----BEGIN CERTIFICATE-----
   ...xxx
@@ -67,13 +71,16 @@ File `fullchain.crt` - сертификат +  промежуточный сер
   -----END CERTIFICATE-----
 ```
 
-File `private.key` - приватный ключ
-
+Private key
+`/etc/ssl/private.key` - old
+`/etc/letsencrypt/live/vbahelpers.ru/privkey.pem`
 ```
   -----BEGIN RSA PRIVATE KEY-----
   ...xxx
   -----END RSA PRIVATE KEY-----
 ```
+
+`/etc/apache2/sites-available/000-default-le-ssl.conf` - ssl cert info
 
 ## Run the app
 hosting --> VPS --> Select my server --> Open console

@@ -14,8 +14,8 @@ function getSslOptions() {
   if (!isProduction) return {};
 
   return {
-    key: fs.readFileSync('../../etc/ssl/private.key'),
-    cert: fs.readFileSync('../../etc/ssl/fullchain.crt')
+    key: fs.readFileSync('../../etc/letsencrypt/live/vbahelpers.ru/privkey.pem'),
+    cert: fs.readFileSync('../../etc/letsencrypt/live/vbahelpers.ru/fullchain.pem')
   };
 }
 
