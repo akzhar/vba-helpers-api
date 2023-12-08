@@ -1,20 +1,18 @@
 Attribute VB_Name = "VbaHelper_LogInfo"
 Option Explicit
 
-Function LogInfo(ByVal logMessage$)
+Function LogInfo(ByVal logMessage$, Optional ByVal logFileName$ = "logs")
     ' Writes new line in log file with current timestamp
-    
-    Const LOG_FILE_NAME$ = "Log.txt"
 
-    Dim logFilePath$: logFilePath = ThisWorkbook.Path & Application.PathSeparator & LOG_FILE_NAME
+    Dim logFilePath$: logFilePath = ThisWorkbook.Path & Application.PathSeparator & logFileName & ".log"
     Dim logFileNum As Integer: logFileNum = FreeFile
     
-    ' if there is no log file create it
+    ' If there is no log file create it
     Open logFilePath For Append As logFileNum
     
-    ' write new line in the end
+    ' Write new line in the end
     Print #logFileNum, GetTimeStamp() & " - " & logMessage ' @dependency: 99.bas
     
-    ' close log file
+    ' Close log file
     Close logFileNum
 End Function

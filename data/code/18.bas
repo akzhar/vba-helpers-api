@@ -1,7 +1,7 @@
-Attribute VB_Name = "VbaHelper_GetWeekday"
+Attribute VB_Name = "VbaHelper_GetWeekdayByDate"
 Option Explicit
 
-Function GetWeekday(ByVal d As Date) As String
+Function GetWeekdayByDate(ByVal d As Date) As String
     ' Gets weekday name by date
-    GetWeekday = WeekdayName(Weekday(d, vbMonday))
+    GetWeekdayByDate = WeekdayName(Weekday(d, vbMonday), , vbMonday)
 End Function

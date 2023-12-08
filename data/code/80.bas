@@ -2,8 +2,8 @@ Attribute VB_Name = "VbaHelper_CompareTables"
 Option Explicit
 
 ' Worksheets number
-Private Const SHEET_1_NO& = 1
-Private Const SHEET_2_NO& = 2
+Private Const SHEET_1_NAME$ = "Table 1"
+Private Const SHEET_2_NAME$ = "Table 2"
 
 ' Left top cornerof the table on both worksheets
 Private Const FIRST_ROW& = 2
@@ -22,8 +22,8 @@ Sub CompareTables()
     Dim iLastRow1&, iLastRow2&
     Dim iLastCol1&, iLastCol2&
 
-    Set ws1 = ThisWorkbook.Sheets(SHEET_1_NO)
-    Set ws2 = ThisWorkbook.Sheets(SHEET_2_NO)
+    Set ws1 = ThisWorkbook.Sheets(SHEET_1_NAME)
+    Set ws2 = ThisWorkbook.Sheets(SHEET_2_NAME)
 
     iLastRow2 = GetLastRow(ws2, FIRST_COL) ' @dependency: 64.bas
     iLastCol2 = GetLastColumn(ws2, FIRST_ROW - 1) ' @dependency: 65.bas
@@ -36,7 +36,7 @@ Sub CompareTables()
     ws1.Range(ws1.Cells(FIRST_ROW, FIRST_COL), ws1.Cells(iLastRow1, FIRST_COL)).Interior.Color = COLOR_RED
 
     If iLastCol2 <> iLastCol1 Then
-        Call Ended
+        Call TurnUpdatesOn(True) ' @dependency: 51.bas
         MsgBox "The number and order of columns in the 2 compared tables must match", vbCritical
         Exit Sub
     End If
@@ -52,7 +52,7 @@ Sub CompareTables()
             Set cellUnique1 = ws1.Cells(i, FIRST_COL)
             Set cellUnique2 = ws2.Cells(j, FIRST_COL)
             
-            If cellUnique1.Value = cellUnique2.Value Then
+            If CStr(cell1.Value) = CStr(cell2.Value) Then
 
                 cellUnique1.Interior.Color = COLOR_GREEN
                 cellUnique2.Interior.Color = COLOR_GREEN
@@ -73,8 +73,8 @@ Sub CompareTables()
                         cell2.Interior.Color = COLOR_RED
 
                         If IsNumeric(cell1.Value) And IsNumeric(cell2.Value) Then
-                            cell1.AddComment "Difference = " & cell1.Value - cell2.Value
-                            cell2.AddComment "Difference = " & cell2.Value - cell1.Value
+                            cell1.AddComment "Difference = " & CStr(cell1.Value - cell2.Value)
+                            cell2.AddComment "Difference = " & CStr(cell2.Value - cell1.Value)
                         End If
 
                     End If
@@ -102,8 +102,8 @@ Sub ResetTables()
     Dim iLastRow1&, iLastRow2&
     Dim iLastCol1&, iLastCol2&
 
-    Set ws1 = ThisWorkbook.Sheets(SHEET_1_NO)
-    Set ws2 = ThisWorkbook.Sheets(SHEET_2_NO)
+    Set ws1 = ThisWorkbook.Sheets(SHEET_1_NAME)
+    Set ws2 = ThisWorkbook.Sheets(SHEET_2_NAME)
 
     iLastRow2 = GetLastRow(ws2, FIRST_COL) ' @dependency: 64.bas
     iLastCol2 = GetLastColumn(ws2, FIRST_ROW - 1) ' @dependency: 65.bas

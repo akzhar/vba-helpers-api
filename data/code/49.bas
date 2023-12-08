@@ -1,9 +1,10 @@
 Attribute VB_Name = "VbaHelper_Round"
 Option Explicit
 
-Function Round(ByVal strNumber$, ByVal numDigits&) As String
+Function Round(ByVal x As Double, ByVal numDigits&) As String
     ' Rounds the specified float number to N digits after the decimal separator
 
+    Dim strNumber$: strNumber = CStr(x)
     Dim delimiter$: delimiter = Application.DecimalSeparator
     Dim delimiterPos As Integer: delimiterPos = InStr(1, strNumber, delimiter, vbTextCompare)
 

@@ -1,8 +1,10 @@
 Attribute VB_Name = "VbaHelper_SetCondFormatting"
 Option Explicit
 
-Function SetCondFormatting(ByRef rng As Range, ByVal compareOperator$, ByVal criteriaValue As Double, Optional isRed As Boolean = False)
+Function SetCondFormatting(ByRef rng As Range, ByVal compareOperator$, ByVal limitValue As Double, Optional isRed As Boolean = False)
     ' Set red / green condition formating
+    ' compareOperator is XlFormatConditionOperator enum
+    ' https://learn.microsoft.com/ru-ru/office/vba/api/excel.xlformatconditionoperator
     Dim xlOperator
     Select Case compareOperator
       Case ">":
@@ -16,12 +18,27 @@ Function SetCondFormatting(ByRef rng As Range, ByVal compareOperator$, ByVal cri
       Case "=":
         xlOperator = xlEqual
       Case Else:
-        End Function
+        Exit Function
     End Select
+
+    Dim fontColor&: fontColor = IIf(isRed, RGB(156, 0, 6), RGB(0, 97, 0)) ' red / green
+    Dim backColor&: backColor = IIf(isRed, RGB(255, 199, 206), RGB(198, 239, 206)) ' red / green
+
+    If rng.FormatConditions.Count Then
+        Dim fc As FormatCondition
+        For Each fc In rng.FormatConditions
+          If fc.Font.Color = fontColor And fc.Interior.Color = backColor Then
+            fc.Delete
+          End If
+        Next fc
+    End If
+
     With rng
-        Call RemoveCondFormatting(rng) ' @dependency: 124.bas
-        .FormatConditions.Add Type:=xlCellValue, Operator:=xlOperator, Formula1:="=" & CStr(criteriaValue)
-        .FormatConditions(1).Font.Color = IIf(isRed, RGB(156, 0, 6), RGB(0, 97, 0)) ' red / green
-        .FormatConditions(1).Interior.Color = IIf(isRed, RGB(255, 199, 206), RGB(198, 239, 206)) ' red / green
+        .FormatConditions.Add _
+          Type:=xlCellValue, _
+          Operator:=xlOperator, _
+          Formula1:="=" & CStr(limitValue)
+        .FormatConditions(.FormatConditions.Count).Font.Color = fontColor
+        .FormatConditions(.FormatConditions.Count).Interior.Color = backColor
     End With
 End Function

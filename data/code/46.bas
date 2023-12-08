@@ -29,8 +29,12 @@ Sub CreateEmail( _
         Case Else
             importanceType = 0
     End Select
-        
-    Dim outlookObj As Object: Set outlookObj = CreateObject("Outlook.Application")
+
+    On Error Resume Next
+    Dim outlookObj As Object: Set outlookObj = GetObject(Class:="Outlook.Application")
+    Err.Clear
+    On Error GoTo 0
+    If outlookObj Is Nothing Then Set outlookObj = CreateObject("Outlook.Application")
     Dim mailObj As Object: Set mailObj = outlookObj.CreateItem(OUTLOOK_ITEM_TYPE)
         
     Dim messageEnding$
@@ -75,7 +79,5 @@ Sub CreateEmail( _
     End With
         
     Set mailObj = Nothing: Set outlookObj = Nothing
-
-    'Debug.Print "Email has been " & messageEnding
 
 End Sub
