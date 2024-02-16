@@ -288,3 +288,9 @@ Public Function IndexOf(ByVal element As Variant) As Long
     Next i
 
 End Function
+
+Public Function ToString() As String
+    
+    ToString = "[ " & Join(internalArr, ", ") & " ]"
+
+End Function
