@@ -19,7 +19,7 @@ Private Sub Class_Initialize()
 End Sub
     
 Private Sub Class_Terminate()
-    Call Reset
+    'Call Reset
 End Sub
 
 ' Public Properties
@@ -144,7 +144,7 @@ Public Sub Create(ByRef sourceRng As Range)
     tblName = Replace(Replace(tblWs.Name & " " & "ListObj", " ", "_"), "-", "_")
     tblName = IIf(IsNumeric(Left(tblName, 1)), "_" & tblName, tblName)
     
-    If Not Utils.IsNamedRangeExists(tblWs, tblName) Then ' @dependency: 118.bas
+    If Not IsNamedRangeExists(tblWs, tblName) Then ' @dependency: 118.bas
         tblWs.AutoFilterMode = False
         tblWs.ListObjects.Add(SourceType:=xlSrcRange, source:=sourceRng, XlListObjectHasHeaders:=xlYes).Name = tblName
         tblWs.ListObjects(tblName).TableStyle = ""
@@ -186,15 +186,15 @@ Public Function GetCell(ByVal colName$, Optional ByVal rowFilter$, Optional rowI
     
 End Function
 
-Public Sub SetValue(ByVal value$, ByVal setCol$, Optional ByVal rowFilter$, Optional rowIndex&)
+Public Sub SetValue(ByVal value, ByVal colName$, Optional ByVal rowFilter$, Optional rowIndex&)
     
     If rowFilter = "" And rowIndex = 0 Then
         Exit Sub
     End If
     
-    If Not IsHeaderExists(setCol) Then Exit Sub
+    If Not IsHeaderExists(colName) Then Exit Sub
     
-    Dim colIndex&: colIndex = ColumnIndexByHeader(setCol)
+    Dim colIndex&: colIndex = ColumnIndexByHeader(colName)
         
     If rowIndex = 0 Then
         Dim arr() As String: arr = Split(rowFilter, "::")
@@ -303,8 +303,8 @@ Public Function DeleteRows(ByVal colName$, ByVal criteria$) As Long
         If _
             IIf( _
                 criteriaSign = "color:", _
-                Utils.IsColoredLike(colCell, criteriaValue), _
-                Application.Evaluate(colCell.value & criteriaSign & criteriaValue) _
+                IsColoredLike(colCell, criteriaValue), _
+                Application.Evaluate(IIf(IsEmpty(colCell.value), "0", CStr(colCell.value)) & criteriaSign & criteriaValue) _
             ) _
         Then
             tblRow.Delete
@@ -346,11 +346,11 @@ Public Function GetColumnValues(ByVal colName$, Optional ByVal onlyUnique As Boo
     
     If Not valuesRng Is Nothing Then
             
-        values = Utils.Rng2Array(rng:=valuesRng) ' @dependency: 3.bas
+        values = Rng2Array(rng:=valuesRng) ' @dependency: 3.bas
         
         If onlyUnique Then
         
-            values = Utils.GetUniqueArr(arr:=values) ' @dependency: 10.bas
+            values = GetUniqueArr(arr:=values) ' @dependency: 10.bas
             
         End If
         

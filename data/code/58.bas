@@ -6,12 +6,12 @@ Function RefreshPQ(ByVal queryName$)
 
     Dim con As WorkbookConnection
 
-    For Each con In ActiveWorkbook.Connections
+    For Each con In ThisWorkbook.Connections
         If (con.Name = "Query - " & queryName) Then
-            With ActiveWorkbook.Connections(con.Name).OLEDBConnection
+            With ThisWorkbook.Connections(con.Name).OLEDBConnection
                 .BackgroundQuery = True
                 .Refresh
-                ' waiting when Power Query refresh is complete
+                ' Waiting when Power Query refresh is completed
                 Call WaitTillRefreshComplete
             End With
         End If

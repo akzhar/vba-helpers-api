@@ -42,20 +42,19 @@ Sub CompareTables()
     End If
 
     Dim i&, j&, k&
-    Dim cellUnique1 As Range, cellUnique2 As Range
     Dim cell1 As Range, cell2 As Range
 
     For i = FIRST_ROW To iLastRow1
 
         For j = FIRST_ROW To iLastRow2
             
-            Set cellUnique1 = ws1.Cells(i, FIRST_COL)
-            Set cellUnique2 = ws2.Cells(j, FIRST_COL)
+            Set cell1 = ws1.Cells(i, FIRST_COL)
+            Set cell2 = ws2.Cells(j, FIRST_COL)
             
             If CStr(cell1.Value) = CStr(cell2.Value) Then
 
-                cellUnique1.Interior.Color = COLOR_GREEN
-                cellUnique2.Interior.Color = COLOR_GREEN
+                cell1.Interior.Color = COLOR_GREEN
+                cell2.Interior.Color = COLOR_GREEN
                 
                 For k = FIRST_COL + 1 To iLastCol1 ' or iLastCol2
 
