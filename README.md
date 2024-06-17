@@ -17,7 +17,7 @@ VBA helpers are stored as plain text files in [./data/code](https://github.com/a
 ## 4. API routes
 - [GET /api/helpers](https://vbahelpers.ru:3001/api/helpers) - get helpers data
 - [GET /api/helpers/search-by-title/**:keyword**](https://vbahelpers.ru:3001/api/helpers/search-by-title/get%20index) - search helpers by title
-- [GET /api/helpers/search-by-category/**:keyword**](https://vbahelpers.ru:3001/api/helpers/search-by-category/http) - search helpers by category
+- [GET /api/helpers/search-by-category/**:keyword**](https://vbahelpers.ru:3001/api/helpers/search-by-category/fetch) - search helpers by category
 - [GET /api/helpers/search-by-keyword/**:keyword**](https://vbahelpers.ru:3001/api/helpers/search-by-keyword/sort%20array) - search helpers by keywords
 - [GET /api/helpers/search-by-name/**:keyword**](https://vbahelpers.ru:3001/api/helpers/search-by-name/getlastrow) - search helpers by name
 - [GET /api/categories](https://vbahelpers.ru:3001/api/categories) - get helpers categories

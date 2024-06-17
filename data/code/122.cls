@@ -291,21 +291,24 @@ Public Function DeleteRows(ByVal colName$, ByVal criteria$) As Long
     
     criteriaValue = Replace(criteria, criteriaSign, "")
 
-    Dim i&, deletedRows&, tblRow As ListRow, colCell As Range
+    Dim i&, deletedRows&, expression$, tblRow As ListRow, colCell As Range
     
     For i = tblObj.ListRows.Count To 1 Step -1
     
         Set tblRow = tblObj.ListRows(i)
         Set colCell = Intersect(tblRow.Range, tblObj.ListColumns(colName).Range)
+
+        expression = IIf( _
+            IsEmpty(colCell.value), _
+            IIf(IsNumeric(colCell.value), "0", ""), _
+            IIf(IsNumeric(colCell.value), CStr(colCell.value), """" & CStr(colCell.value) & """") _
+        ) _
+        & criteriaSign & criteriaValue
         
         ' @dependency: 36.bas
         
         If _
-            IIf( _
-                criteriaSign = "color:", _
-                IsColoredLike(colCell, criteriaValue), _
-                Application.Evaluate(IIf(IsEmpty(colCell.value), "0", CStr(colCell.value)) & criteriaSign & criteriaValue) _
-            ) _
+            IIf(criteriaSign = "color:", IsColoredLike(colCell, criteriaValue), Application.Evaluate(expression)) _
         Then
             tblRow.Delete
             deletedRows = deletedRows + 1
