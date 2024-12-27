@@ -10,5 +10,5 @@ Function CopyWs(ByRef wsToCopy As Worksheet, ByVal afterWs As Worksheet, ByVal c
         Application.DisplayAlerts = True
     End If
     wsToCopy.name = copiedWsName
-    ThisWorkbook.Sheets(copiedWsName).Tab.Color = vbYellow
+    ThisWorkbook.ActiveSheet.Tab.Color = vbYellow
 End Function
