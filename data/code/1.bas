@@ -8,5 +8,9 @@ Function AddToArr(ByRef arr(), ByVal element, Optional ByVal startsFrom& = 0)
     Else
         ReDim Preserve arr(startsFrom To UBound(arr) + 1)
     End If
-    arr(UBound(arr)) = element
+    If TypeName(element) = "Dictionary" Then
+        Set arr(UBound(arr)) = element
+    Else
+        arr(UBound(arr)) = element
+    End If
 End Function
