@@ -7,7 +7,7 @@ Function FixNumbers(ByRef rng As Range)
     Dim cell As Range
     Call TurnUpdatesOn(False) ' @dependency: 51.bas
     For Each cell In rng
-        If Len(cell) > 0 Then
+        If Len(cell) > 0 And IsNumeric(cell.Value2) Then
             cell.Value2 = CDbl(Replace(cell.Value2, ",", Application.DecimalSeparator, 1, -1, vbBinaryCompare))
         End If
     Next cell

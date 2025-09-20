@@ -221,18 +221,158 @@ Public Sub SetFilters(ByVal filters$)
     Call ClearFilters
     
     Dim filtersArr() As String: filtersArr = Split(filters, ";")
+    Dim formulaArr()
     
-    Dim i&
+    Dim i&, j&
     For i = LBound(filtersArr) To UBound(filtersArr)
         
-        Dim arr() As String: arr = Split(filtersArr(i), "::")
-        Dim colIndex&: colIndex = ColumnIndexByHeader(arr(0))
-        ' Set filter
-        tblObj.Range.AutoFilter Field:=colIndex, Criteria1:=arr(1)
+        If filtersArr(i) <> "" Then
+        
+            Dim arr() As String: arr = Split(filtersArr(i), "::")
+            Dim colIndex&: colIndex = ColumnIndexByHeader(arr(0))
+            Dim colFilter$: colFilter = arr(1)
+            
+            Dim isWildcards As Boolean, isNot As Boolean, isOr As Boolean
+                
+            If colFilter <> "All" And colFilter <> "" Then
+
+                isWildcards = CBool(Left(colFilter, 1) = "~")
+                isNot = CBool(Left(colFilter, 2) = "<>")
+                isOr = InStr(1, colFilter, "|", vbTextCompare)
+
+                If isWildcards Then
+                    
+                    If isOr Then
+                    
+                        arr = Split(colFilter, "|")
+                        For j = LBound(arr) To UBound(arr)
+                            colFilter = arr(j)
+                            arr(j) = "COUNTIF(RC" & colIndex & ", """ & Right(colFilter, Len(colFilter) - 1) & """)"
+                        Next j
+                        
+                        Call Utils.AddToArr(formulaArr, "OR(" & Join(arr, ",") & ")")
+
+                    Else
+                    
+                        Call Utils.AddToArr(formulaArr, "COUNTIF(RC" & colIndex & ", """ & Right(colFilter, Len(colFilter) - 1) & """)")
+                    
+                    End If
+                    
+                ElseIf isNot Then
+                
+                    If isOr Then
+                    
+                        arr = Split(colFilter, "|")
+                        For j = LBound(arr) To UBound(arr)
+                            colFilter = arr(j)
+                            arr(j) = "<>" & """" & Right(colFilter, Len(colFilter) - 2) & """"
+                        Next j
+                    
+                        Call Utils.AddToArr(formulaArr, "AND(RC" & colIndex & Join(arr, ",RC" & colIndex) & ")")
+                    
+                    Else
+                    
+                        Call Utils.AddToArr(formulaArr, "RC" & colIndex & "<>""" & Right(colFilter, Len(colFilter) - 2) & """")
+                    
+                    End If
+
+                Else
+
+                    If isOr Then
+
+                        arr = Split(colFilter, "|")
+                        For j = LBound(arr) To UBound(arr)
+                            colFilter = arr(j)
+                            arr(j) = "=" & """" & colFilter & """"
+                        Next j
+
+                        Call Utils.AddToArr(formulaArr, "OR(RC" & colIndex & Join(arr, ",RC" & colIndex) & ")")
+
+                    Else
+
+                        Call Utils.AddToArr(formulaArr, "RC" & colIndex & "=" & """" & colFilter & """")
+
+                    End If
+                End If
+            End If
+        End If
     
     Next i
     
+    ' Проставляем формулу, чтобы проставить TRUE / FALSE для каждой строки таблицы
+    ' И затем пофильтровать таблицу по этой колонке
+    
+    Dim filterFormula$: filterFormula = "AND(" & Join(formulaArr, ",") & ")"
+    Erase formulaArr
+    
+    Dim colToFilterName$: colToFilterName = "xxx_formula_2_filter_xxx"
+    
+    If Not IsColumnExists(colToFilterName) Then
+        Call AddColumn(colToFilterName)
+    End If
+    
+    Set rng = GetColumn(colToFilterName, includeHeader:=False)
+    rng.ClearContents
+    
+    Set rng = GetCell(colToFilterName, rowIndex:=1)
+    rng.FormulaR1C1 = "=" & filterFormula
+    
+    colIndex = ColumnIndexByHeader(colToFilterName)
+    
+    tblObj.Range.AutoFilter Field:=colIndex, Criteria1:=True
+    
 End Sub
+
+'Public Sub SetFilters(ByVal filters$)
+'    
+'    Call ClearFilters
+'    
+'    Dim filtersArr() As String: filtersArr = Split(filters, ";")
+'    
+'    Dim i&
+'    For i = LBound(filtersArr) To UBound(filtersArr)
+'        
+'        If filtersArr(i) <> "" Then
+'        
+'            Dim arr() As String: arr = Split(filtersArr(i), "::")
+'            Dim colIndex&: colIndex = ColumnIndexByHeader(arr(0))
+'            Dim colFilter$: colFilter = arr(1)
+'            
+'            Dim isWildcards As Boolean, isNot As Boolean, isOr As Boolean
+'            
+'            If colFilter <> "All" And colFilter <> "" Then
+'            
+'                isWildcards = CBool(Left(colFilter, 1) = "~")
+'                isNot = CBool(Left(colFilter, 2) = "<>")
+'                isOr = InStr(1, colFilter, "|", vbTextCompare)
+'                
+'                If isWildcards Then
+'                
+'                    tblObj.Range.AutoFilter _
+'                        Field:=colIndex, _
+'                        criteria1:=Right(colFilter, Len(colFilter) - 1)
+'                    
+'                ElseIf isNot Then
+'                
+'                    tblObj.Range.AutoFilter _
+'                        Field:=colIndex, _
+'                        criteria1:=colFilter
+'                Else
+'                    
+'                    tblObj.Range.AutoFilter _
+'                        Field:=colIndex, _
+'                        criteria1:=IIf(isOr, Split(colFilter, "|"), Array(colFilter)), _
+'                        Operator:=xlFilterValues
+'                    
+'                End If
+'                
+'            End If
+'        
+'        End If
+'    
+'    Next i
+'    
+'End Sub
 
 Public Function AddRow() As Range
 
