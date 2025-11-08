@@ -4,11 +4,12 @@ Option Explicit
 Function CONCATIF(ByRef rngToCheck As Range, ByRef rngToConcat As Range, ByVal pattern$, Optional separator$ = " ") As String
     ' Performs concatenation of values in a range by the condition
     Application.Volatile True
-    Dim cell As Range, str$
-    For Each cell In rngToCheck
-       If cell.Value Like pattern And Trim(rngToConcat.Cells(cell.Row - rngToCheck.Row + 1, 1)) <> "" Then
-          str = str & IIf(str <> "", separator, "") & rngToConcat.Cells(cell.Row - rngToCheck.Row + 1, 1)
-       End If
-    Next cell
+    Dim rng As Range, str$, i&
+    For i = 1 To rngToCheck.Cells.Count
+        Set rng = rngToCheck(i)
+        If rng.Value Like pattern And Trim(rngToConcat(i).Value) <> "" Then
+            str = str & IIf(str <> "", separator, "") & rngToConcat(i).Value
+        End If
+    Next i
     CONCATIF = str
 End Function

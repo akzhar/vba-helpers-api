@@ -250,11 +250,11 @@ Public Sub SetFilters(ByVal filters$)
                             arr(j) = "COUNTIF(RC" & colIndex & ", """ & Right(colFilter, Len(colFilter) - 1) & """)"
                         Next j
                         
-                        Call Utils.AddToArr(formulaArr, "OR(" & Join(arr, ",") & ")")
+                        Call AddToArr(formulaArr, "OR(" & Join(arr, ",") & ")") ' @dependency: 1.bas
 
                     Else
                     
-                        Call Utils.AddToArr(formulaArr, "COUNTIF(RC" & colIndex & ", """ & Right(colFilter, Len(colFilter) - 1) & """)")
+                        Call AddToArr(formulaArr, "COUNTIF(RC" & colIndex & ", """ & Right(colFilter, Len(colFilter) - 1) & """)") ' @dependency: 1.bas
                     
                     End If
                     
@@ -268,11 +268,11 @@ Public Sub SetFilters(ByVal filters$)
                             arr(j) = "<>" & """" & Right(colFilter, Len(colFilter) - 2) & """"
                         Next j
                     
-                        Call Utils.AddToArr(formulaArr, "AND(RC" & colIndex & Join(arr, ",RC" & colIndex) & ")")
+                        Call AddToArr(formulaArr, "AND(RC" & colIndex & Join(arr, ",RC" & colIndex) & ")") ' @dependency: 1.bas
                     
                     Else
                     
-                        Call Utils.AddToArr(formulaArr, "RC" & colIndex & "<>""" & Right(colFilter, Len(colFilter) - 2) & """")
+                        Call AddToArr(formulaArr, "RC" & colIndex & "<>""" & Right(colFilter, Len(colFilter) - 2) & """") ' @dependency: 1.bas
                     
                     End If
 
@@ -286,11 +286,11 @@ Public Sub SetFilters(ByVal filters$)
                             arr(j) = "=" & """" & colFilter & """"
                         Next j
 
-                        Call Utils.AddToArr(formulaArr, "OR(RC" & colIndex & Join(arr, ",RC" & colIndex) & ")")
+                        Call AddToArr(formulaArr, "OR(RC" & colIndex & Join(arr, ",RC" & colIndex) & ")") ' @dependency: 1.bas
 
                     Else
 
-                        Call Utils.AddToArr(formulaArr, "RC" & colIndex & "=" & """" & colFilter & """")
+                        Call AddToArr(formulaArr, "RC" & colIndex & "=" & """" & colFilter & """") ' @dependency: 1.bas
 
                     End If
                 End If
