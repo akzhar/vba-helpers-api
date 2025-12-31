@@ -1,7 +1,7 @@
 Attribute VB_Name = "VbaHelper_NestedArrTo2DArr"
 Option Explicit
 
-Private Function NestedArrTo2DArr(ByVal arr) As Variant()
+Function NestedArrTo2DArr(ByVal arr) As Variant()
     ' Transforms nested array (array of 1-dim arrays) into 2-dim array
     
     Dim i&, j&, res()
